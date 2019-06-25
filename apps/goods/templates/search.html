@@ -1,0 +1,111 @@
+{% extends 'mj.html' %}
+{% load staticfiles %}
+{% block title %}搜索店铺{% endblock title %}
+{% block topfiles %}
+<link type="text/css" rel="stylesheet" href="{% static "css/common.css" %}">
+<link type="text/css" rel="stylesheet" href="{% static "css/search.css" %}">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+   $('.wm_list li').click(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300;
+		//给菜单添加选择样式
+	    $(this).addClass('active').siblings().removeClass('active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.wm_list_con').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script>
+<script src="{% static 'js/Popt.js' %}"></script>
+<script src="{% static 'js/cityJson.js' %}"></script>
+<script src="{% static 'js/citySet.js' %}"></script>
+{% endblock topfiles %}
+{% block body %}
+<div id="main">
+<div class="wrapper clearfix" id="wrapper">
+<div class="wm_list_con">
+    <ul class="songlist__header">
+        <li class="songlist__header_name">店铺</li>
+    </ul>
+    <div class="list_1">
+        <ul>
+        {# 列出当前分页所对应的数据内容 #}
+        {% if show_all %}
+            {% for item in page.object_list %}
+
+            <li>
+                   <a href="{% url 'goods:shop_detail' item.id '1' '1' '1' %}">
+                       <div class="wm_img"><img src="{{ item.shop_image }}"></div>
+                       <div class="cg_inf">
+                          <h3>{{ item.shop_name }}</h3>
+                          <div class="cg_eva">
+                              <ul>
+                                  <li><img src="{% static 'image/eva.png' %}"></li>
+                                  <li><img src="{% static 'image/eva.png' %}"></li>
+                                  <li><img src="{% static 'image/eva.png' %}"></li>
+                                  <li><img src="{% static 'image/eva.png' %}"></li>
+                                  <li><img src="{% static 'image/eva.png' %}"></li>
+                              </ul>
+                              <span>{{ item.shop_score }}</span>
+                          </div>
+                          <div class="food_sc">
+                             <span>起送：{{ item.shop_price }}</span><span>配送费：{{ item.send_price }}</span><span>时间：{{ item.duration }}分钟</span>
+                          </div>
+                       </div>
+                   </a>
+            </li>
+            {% endfor %}
+        {% else %}
+            {# 导入自带高亮功能 #}
+            {% load highlight %}
+            {% for item in page.object_list %}
+            <li class="js_songlist__child" mid="1425301" ix="6">
+                <a href="{% url 'goods:shop_detail' item.object.id '1' '1' '1' %}">
+                    <div class="songlist__item">
+                        <div class="songlist__songname">{% highlight item.object.shop_name with query %}</div>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+    {# 分页导航，如有疑问请参考分页功能 #}
+    <div class="page-box">
+    <div class="pagebar" id="pageBar">
+    {# 上一页的URL地址 #}
+    {% if page.has_previous %}
+        {% if query %}
+            <a href="{% url 'goods:haystack'%}?q={{ query }}&amp;page={{ page.previous_page_number }}" class="prev">上一页</a>
+        {% else %}
+            <a href="{% url 'goods:haystack'%}?page={{ page.previous_page_number }}" class="prev">上一页</a>
+        {% endif %}
+    {% endif %}
+    {# 列出所有的URL地址 #}
+    {% for num in page.paginator.page_range %}
+        {% if num == page.number %}
+            <span class="sel">{{ page.number }}</span>
+        {% else %}
+            {% if query %}
+                <a href="{% url 'goods:haystack' %}?q={{ query }}&amp;page={{ num }}" target="_self">{{num}}</a>
+            {% else %}
+                <a href="{% url 'goods:haystack' %}?page={{ num }}" target="_self">{{num}}</a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {# 下一页的URL地址 #}
+    {% if page.has_next %}
+        {% if query %}
+            <a href="{% url 'goods:haystack' %}?q={{ query }}&amp;page={{ page.next_page_number }}" class="next">下一页</a>
+        {% else %}
+            <a href="{% url 'goods:haystack' %}?page={{ page.next_page_number }}" class="next">下一页</a>
+        {% endif %}
+    {% endif %}
+    </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock body %}

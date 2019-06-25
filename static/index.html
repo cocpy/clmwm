@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/index.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+<script src="js/Popt.js"></script>
+<script src="js/cityJson.js"></script>
+<script src="js/citySet.js"></script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+      <div class="top1_con">
+         <div class="top1_con_f">
+            <span>Hi 你吃了吗?</span>
+         </div>
+         <div class="top_lore">
+            <a href="login.html">请登录</a> <a href="register.html">注册</a>
+         </div>
+         <div class="dw_address">
+            请选择地址：<input type="text" id="city"  value=""/>
+         </div>
+		 <script type="text/javascript">
+            $("#city").click(function (e) {
+                SelCity(this,e);
+                console.log("inout",$(this).val(),new Date())
+            });
+            </script>
+      </div>      
+   </div>
+   <div  class="top2">
+      <div class="top2_con">
+         <div class="top2_con_f">
+            <a href="index.html"><img src="image/logo.gif"></a>
+         </div>
+         <div class="sea_form">
+            <form>
+               <input type="text" placeholder="搜索商家或地点"><button>搜索</button>
+            </form>
+         </div>
+         <nav>
+            <a href="index.html">首页</a>
+            <a href="wm_index.html">外卖</a>
+         </nav>
+      </div>
+   </div>
+</div>
+<!--顶部结束-->
+<!--轮播图-->
+<div id="banner">
+     <nav>
+        <ul>
+            <li><a href="wm_index.html"><img src="image/zc.png">中餐</a></li>
+            <li><a href="wm_index.html"><img src="image/xc.png">西餐</a></li>
+            <li><a href="wm_index.html"><img src="image/sg.png">水果</a></li>
+            <li><a href="wm_index.html"><img src="image/yp.png">饮品</a></li>
+        </ul>
+     </nav>
+     <div class="banner">
+     </div>
+</div>
+<!--轮播图-->
+<div id="dinner">
+   <div class="dinner_title">
+      <h2>中餐</h2><a href="wm_index.html">查看全部></a>
+   </div>
+   <div class="dinner_con_bg">
+      <div class="dinner_con">
+         <ul>
+            <li>
+            <a href="wm_shop.html">
+               <img src="image/din_1.jpg">
+               <div class="cg_inf">
+                  <h3>川菜馆</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_1.jpg">
+               <div class="cg_inf">
+                  <h3>川菜馆</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_1.jpg">
+               <div class="cg_inf">
+                  <h3>川菜馆</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_1.jpg">
+               <div class="cg_inf">
+                  <h3>川菜馆</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_1.jpg">
+               <div class="cg_inf">
+                  <h3>川菜馆</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div id="dinner">
+   <div class="dinner_title">
+      <h2>西餐</h2><a href="wm_index.html">查看全部></a>
+   </div>
+   <div class="dinner_con_bg">
+      <div class="dinner_con">
+         <ul>
+            <li>
+            <a href="wm_shop.html">
+               <img src="image/din_2.jpg">
+               <div class="cg_inf">
+                  <h3>西餐厅</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_2.jpg">
+               <div class="cg_inf">
+                  <h3>西餐厅</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_2.jpg">
+               <div class="cg_inf">
+                  <h3>西餐厅</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_2.jpg">
+               <div class="cg_inf">
+                  <h3>西餐厅</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+            </a>
+            </li>
+            <li>
+               <a href="wm_shop.html">
+               <img src="image/din_2.jpg">
+               <div class="cg_inf">
+                  <h3>西餐厅</h3>
+                  <div class="cg_eva">
+                      <ul>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                          <li><img src="image/eva.png"></li>
+                      </ul>
+                      <span>5分</span>
+                  </div>
+                  <div class="food_sc">
+                     <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                  </div>
+               </div>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div id="fruit">
+   <div class="fruit_title">
+      <h2>水果</h2>
+   </div>
+   <div class="fruit_con">
+      <a href="wm_index.html" class="a_href">查看全部></a>
+      <div class="fruit_con_ul">
+         <ul>
+            <li>
+               <a href="wm_shop.html"><img src="image/sgd_1.jpg">
+                  <div class="sgd_inf">
+                      <h3>水果店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/sgd_2.jpg">
+                  <div class="sgd_inf">
+                      <h3>水果店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/sgd_3.jpg">
+                  <div class="sgd_inf">
+                      <h3>水果店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/sgd_4.jpg">
+                  <div class="sgd_inf">
+                      <h3>水果店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div id="drink">
+   <div class="drink_title">
+      <h2>饮品</h2>
+   </div>
+   <div class="drink_con">
+      <a href="wm_index.html" class="a_href">查看全部></a>
+      <div class="drink_con_ul">
+         <ul>
+            <li>
+               <a href="wm_shop.html"><img src="image/ypd_1.jpg">
+                  <div class="ypd_inf">
+                      <h3>饮品店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/ypd_2.jpg">
+                  <div class="ypd_inf">
+                      <h3>饮品店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/ypd_3.jpg">
+                  <div class="ypd_inf">
+                      <h3>饮品店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+            <li>
+               <a href="wm_shop.html"><img src="image/ypd_4.jpg">
+                  <div class="ypd_inf">
+                      <h3>饮品店</h3>
+                      <div class="cg_eva">
+                          <ul>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                              <li><img src="image/eva.png"></li>
+                          </ul>
+                          <span>5分</span>
+                      </div>
+                      <div class="food_sc">
+                         <span>起送：15</span><span>配送费：2</span><span>时间：38分钟</span>	
+                      </div>
+                  </div> 
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div id="service_int">
+   <div class="ser_title">
+      <h2>服务介绍</h2>
+   </div>
+   <div class="ser_con">
+      <ul>
+         <li><a href="wm_index.html"><img src="image/ser_1.jpg"><span>中餐</span></a></li>
+         <li><a href="wm_index.html"><img src="image/ser_2.jpg"><span>西餐</span></a></li>
+         <li><a href="wm_index.html"><img src="image/ser_3.jpg"><span>水果</span></a></li>
+         <li><a href="wm_index.html"><img src="image/ser_4.jpg"><span>饮品</span></a></li>
+      </ul>
+   </div>
+</div>
+<footer>
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</body>
+</html>

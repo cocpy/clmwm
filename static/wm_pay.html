@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+<script src="js/Popt.js"></script>
+<script src="js/cityJson.js"></script>
+<script src="js/citySet.js"></script>
+
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+      <div class="top1_con">
+         <div class="top1_con_f">
+            <span>Hi 你吃了吗?</span>
+         </div>
+         <div class="top_lore">
+            <a href="login.html">请登录</a> <a href="register.html">注册</a>
+         </div>
+         <div class="dw_address">
+            请选择地址：<input type="text" id="city"  value=""/>
+         </div>
+		 <script type="text/javascript">
+            $("#city").click(function (e) {
+                SelCity(this,e);
+                console.log("inout",$(this).val(),new Date())
+            });
+            </script>
+      </div>      
+   </div>
+   <div  class="top2">
+      <div class="top2_con">
+         <div class="top2_con_f">
+            <a href="index.html"><img src="image/logo.gif"></a>
+         </div>
+         <div class="buy_step">
+            <ul>
+               <li>1.提交订单</li><li>2.选择支付方式</li><li>3.购买成功</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分开始-->
+<div id="main">
+   <div class="pay_warn">
+      <span><img src="image/warn.png">请在<b>14:26</b>内完成支付，超时订单会自动取消</span>
+   </div>
+   <div class="pay_title">
+      <span>项目:中国兰州牛肉拉面   订单号:5878820865124</span>
+      <span>应付金额:<b>￥37.80</b></span>
+   </div>
+   <div class="pay_con">
+      <form>
+         <input type="radio" name="pay" value="微信支付" checked id="wx_pay">
+            <label for="wx_pay"><img src="image/wx_icon.png">微信支付</label>
+         <input type="radio" name="pay" value="支付宝支付" id="zfb_pay">
+            <label for="zfb_pay"><img src="image/zfb.png">支付宝支付</label>
+      </form>
+      <div class="pay_state">
+         <span>支付<b>￥37.80</b></span>
+         <div class="pay_a">
+            <a href="#">取消订单</a><a href="#">返回修改订单</a><button>去付款</button>
+         
+         </div>
+      </div>	
+   </div>
+</div>
+<!--中间部分结束-->
+<!--底部开始-->
+<footer id="sj_footer">
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+<!--底部结束-->
+</body>
+</html>

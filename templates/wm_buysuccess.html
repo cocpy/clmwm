@@ -1,0 +1,308 @@
+<!doctype html>
+{% extends 'mj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-购买成功{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/webuploader.min.js' %}"></script>
+<script src="{% static 'js/diyUpload.js' %}"></script>
+<script src="{% static 'js/Popt.js' %}"></script>
+<script src="{% static 'js/cityJson.js' %}"></script>
+<script src="{% static 'js/citySet.js' %}"></script>
+{% endblock topfiles %}
+
+{% block header_con %}
+<div id="top">
+   <div class="top1">
+          <div class="top1_con">
+             <div class="top1_con_f">
+                <span>Hi，{% if user.is_authenticated %}{{ user.real_name }} {% endif %}</span><span></span>
+             </div>
+             <div class="top_lore">
+                {% if user.is_authenticated %}
+                {% else %}
+				    <a href="{% url 'user:login' %}">请登录</a> <a href="{% url 'user:register' %}">注册</a>
+                {% endif %}
+
+             </div>
+             <div class="dw_address" style="display: none">
+                请选择地址：<input type="text" id="city"  value=""/>
+             </div>
+             <script type="text/javascript">
+                $("#city").click(function (e) {
+                    SelCity(this,e);
+                    console.log("inout",$(this).val(),new Date())
+                });
+                </script>
+          </div>
+       </div>
+   <div  class="top2">
+      <div class="top2_con">
+         <div class="top2_con_f">
+            <a href="{% url 'goods:index' %}"><img src="{% static 'image/logo.gif' %}"></a>
+         </div>
+         <div class="buy_step3">
+            <ul>
+               <li>1.提交订单</li><li>2.选择支付方式</li><li>3.支付成功</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock header_con %}
+
+{% block body %}
+<div id="main">
+   <div class="order_mx">
+      <p>订单明细<span>本次订单预计送达时间：{{ arrive_time }}</span></p>
+      <div class="order_mx1">
+         <ul>
+             {% for good in order_goods %}
+            <li><span>{{ good.sku.name }}</span><span>￥{{ good.price }}*{{ good.count }}</span></li>
+             {% endfor %}
+         </ul>
+      </div>
+      <div class="order_mx2">
+         <ul>
+             {% for good in order_goods %}
+            <li><span>餐盒费</span><span>￥{{ good.sku.pack }}*{{ good.count }}</span></li>
+             {% endfor %}
+             <li><span>配送费</span><span>￥{{ order.transit_price }}</span></li>
+         </ul>
+         <div class="order_total">
+            <b>合计</b>
+            <b>￥{{ pay_price }}</b>
+         </div>
+      </div>
+      <div class="order_mx3">
+         <ul>
+            <li>
+                {% if order.order_status > 1 %}
+                商家待接单
+                <span></span>
+                {% endif %}
+            </li>
+
+            {% if order.order_status > 2 %}
+             <li>
+                商家已接单
+                <span></span>
+            </li>
+            {% else %}
+            <li>
+                {% if order.order_status == 0 %}
+                商家拒绝接单，支付金额两小时内退回原账户
+                {% endif %}
+            </li>
+            {% endif %}
+
+            <li>
+                {% if order.order_status > 3 %}
+                骑手取货中
+                <span></span>
+                {% endif %}
+            </li>
+            <li>
+                {% if order.order_status > 4 %}
+                订单配送中
+                <span></span>
+                {% endif %}
+            </li>
+            <li>
+                {% if order.order_status > 5 %}
+                订单已送达
+                {% endif %}
+            </li>
+         </ul>
+      </div>
+      <div class="order_mx4">
+         <ul>
+             {% for track in order_track %}
+            <li>{{ track.create_time }}</li>
+             {% endfor %}
+         </ul>
+      </div>
+      <div class="clr"></div>
+   </div>
+
+   <div class="order_eval">
+      <form method="post" action="/comment/order/" enctype="multipart/form-data" id="order_comment" name="order_comment">
+      {% csrf_token %}
+      <div class="sc_eval">
+         <div class="sc_eval_title">送餐评价</div>
+         <div class="sc_eval_con">
+
+               <input type="checkbox" value="1" name="sc_eval" id="sc_eval1" class="sc_eval_input">
+               <label for="sc_eval1">礼貌热情</label>
+               <input type="checkbox" value="2" name="sc_eval" id="sc_eval2" class="sc_eval_input">
+               <label for="sc_eval2">快速准时</label>
+               <input type="checkbox" value="3" name="sc_eval" id="sc_eval3" class="sc_eval_input">
+               <label for="sc_eval3">仪表整洁</label>
+               <input type="checkbox" value="4" name="sc_eval" id="sc_eval4" class="sc_eval_input">
+               <label for="sc_eval4">风雨无阻</label>
+               <input type="checkbox" value="5" name="sc_eval" id="sc_eval5" class="sc_eval_input">
+               <label for="sc_eval5">态度友善</label>
+               <input type="checkbox" value="6" name="sc_eval" id="sc_eval6"  class="sc_eval_input">
+               <label for="sc_eval6">餐品完好</label>
+                <textarea placeholder="亲，菜品口味如何，服务是否周到？" id="detail_comment" name="detail_comment" class="inp_count" maxlength="400"></textarea>
+                <span class="wordsNum">0/150</span>
+
+            <!--监听数字个数-->
+               <script language="javascript" type="text/javascript">
+					var checkStrLengths = function (str, maxLength) {
+						var maxLength = maxLength;
+						var result = 0;
+						if (str && str.length > maxLength) {
+							result = maxLength;
+						} else {
+							result = str.length;
+						}
+						return result;
+					}
+					$(".inp_count").on('input propertychange', function () {
+						//获取输入内容
+						var userDesc = $(this).val();
+						//判断字数
+						var len;
+						if (userDesc) {
+							len = checkStrLengths(userDesc, 350);
+						} else {
+							len = 0;
+						}
+						//显示字数
+						$(".wordsNum").html(len + '/350');});
+				</script>
+            <!--监听数字个数-->
+         </div>
+      </div>
+      <div class="yc_eval">
+         <div class="yc_eval_title">订单评价</div>
+         <div class="yc_eval_con">
+            <div class="order-list-Below" id="div_flavor">
+            <span>口味</span>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <input id="flavor" name="flavor" style="display: none" value="">
+         </div>
+            <div class="order-list-Below" id="div_package">
+            <span>包装</span>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <input id="package" name="package" style="display: none" value="">
+         </div>
+            <script type="text/javascript">
+$("#div_flavor ul li").click(
+    function(){
+        var num = $(this).index()+1;
+        var len = $(this).index();
+        document.getElementById("flavor").value = num;
+
+        var thats = $(this).parent(".order-list-Below ul").find("li");
+        if($(thats).eq(len).attr("class")=="on"){
+            if($(thats).eq(num).attr("class")=="on"){
+                $(thats).removeClass();
+                for (var i=0 ; i<num; i++) {
+                    $(thats).eq(i).addClass("on");
+                }
+            }else{
+                $(thats).removeClass();
+                for (var k=0 ; k<len; k++) {
+                    $(thats).eq(k).addClass("on");
+                }
+            }
+        }else{
+            $(thats).removeClass();
+            for (var j=0 ; j<num; j++) {
+                $(thats).eq(j).addClass("on");
+            }
+        }
+    }
+);
+$("#div_package ul li").click(
+    function(){
+        var num = $(this).index()+1;
+        var len = $(this).index();
+        document.getElementById("package").value = num;
+
+        var thats = $(this).parent(".order-list-Below ul").find("li");
+        if($(thats).eq(len).attr("class")=="on"){
+            if($(thats).eq(num).attr("class")=="on"){
+                $(thats).removeClass();
+                for (var i=0 ; i<num; i++) {
+                    $(thats).eq(i).addClass("on");
+                }
+            }else{
+                $(thats).removeClass();
+                for (var k=0 ; k<len; k++) {
+                    $(thats).eq(k).addClass("on");
+                }
+            }
+        }else{
+            $(thats).removeClass();
+            for (var j=0 ; j<num; j++) {
+                $(thats).eq(j).addClass("on");
+            }
+        }
+    }
+);
+</script>
+         </div>
+         <div class="shai_pic" style="display: none">
+             <ul class="upload-ul clearfix">
+                <li class="upload-pick">
+                    <div class="webuploader-container clearfix" id="goodsUpload"></div>
+                </li>
+            </ul>
+            <script src="{% static 'js/webuploader.min.js' %}"></script>
+            <script src="{% static 'js/diyUpload.js' %}"></script>
+            <script>
+            $(function(){
+            
+                //上传图片
+                var $tgaUpload = $('#goodsUpload').diyUpload({
+                    url:'/uploadFilePath',
+                    success:function( data ) { alert(data) },
+                    error:function( err ) { },
+                    buttonText : '',
+                    accept: {
+                        title: "Images",
+                        extensions: 'gif,jpg,jpeg,bmp,png'
+                    },
+                    thumb:{
+                        width:120,
+                        height:90,
+                        quality:100,
+                        allowMagnify:true,
+                        crop:true,
+                        type:"image/jpeg"
+                    }
+                });
+            });
+            </script>
+         </div>
+          <input class="shai_pic" type="file" name="file" id="file" multiple>
+          <input value="{{ order.order_id }}" id="order_id" name="order_id" style="display: none" type="text">
+         </div>
+      <div class="clr"></div>
+
+      </form>
+      <button class="sub_eval">提交评价</button>
+        <script language="javascript" type="text/javascript">
+            $(".sub_eval").click(function(){
+                $("#order_comment").submit();
+            });
+        </script>
+   </div>
+
+</div>
+{% endblock body %}

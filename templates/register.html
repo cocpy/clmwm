@@ -1,0 +1,85 @@
+<!doctype html>
+{#加载静态文件#}
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-注册</title>
+<link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+   </div>
+   <div class="login_logo">
+      <a href="index.html"><img src="{% static 'image/logo.gif' %}"></a>
+      <span class="reg_href">已有吃了么账号？<a href="login.html">登录</a></span>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间注册-->
+<div id="register_main">
+{#    此处上传文件需要在form表单添加enctype属性#}
+   <form method="post" action="/user/register/" enctype="multipart/form-data" id="register" name="register">
+       {% csrf_token %}
+      <ul>
+         <li><span>账号</span><input type="text" name="user_name" id="user_name"></li>
+         <li><span>创建密码</span><input type="password" name="pwd" id="pwd"></li>
+         <li><span>确认密码</span><input type="password" name="cpwd" id="cpwd"></li>
+         <li><span>真实姓名</span><input type="text" name="receiver" id="receiver"></li>
+         <li><span>联系电话</span><input type="text" name="phone" id="phone"></li>
+         <li><span>地址</span><input type="text" name="addr" id="addr"></li>
+         <li><span>邮箱</span><input type="text" name="email" id="email"></li>
+         <li><span>性别</span><input name="sex" type="radio" value="1"  checked/><span>男</span><input name="sex" type="radio" value="0"/><span>女</span></li>
+         <li><span>用户类型</span><input name="mjsj" type="radio" value="0"  checked/><span>买家</span><input name="mjsj" type="radio" value="1"/><span>商家</span></li>
+         <li><span>头像</span>
+                 <div class="img_yulan">
+                    <img id="preview" />
+                 </div>
+               	<script type="text/javascript">
+                    function imgPreview(fileDom){
+                        //判断是否支持FileReader
+                        if (window.FileReader) {
+                            var reader = new FileReader();//创建filereader对象
+                        } else {
+                            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+                        }
+                        //获取文件
+                        var file = fileDom.files[0];
+                        //读取完成
+                        reader.onload = function(e) {
+                            //获取图片dom
+                            var img = document.getElementById("preview");
+                            //图片路径设置为读取的图片
+                            img.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                </script>
+                <input type="file" name="file" onchange="imgPreview(this)">
+         </li>
+      </ul>
+   </form>
+   <button class="agree_btn">同意以下协议并注册</button>
+    <script language="javascript" type="text/javascript">
+        $(".agree_btn").click(function(){
+            $("#register").submit();
+        });
+    </script>
+    {{ errmsg }}
+</div>
+<!--中间注册-->
+<footer>
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</body>
+</html>

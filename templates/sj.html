@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+{% load staticfiles %}
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    {# 网页标题内容块 #}
+	<title>{% block title %}{% endblock title %}</title>
+	<link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+                url: '/ordermanage/select/',
+                data:{'status': status},
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.res){
+                        $("#status").val("start");
+                    }else{
+                        $("#status").val("stop");
+                    }
+                }
+        })
+    }
+
+    function WebSocketTest() {
+        var status = $('#status').val();
+        if (status == 'start'){
+            changestatus(1)
+        }else{
+            changestatus(0)
+            return;
+        }
+        var num = 0;
+        var flag = false;
+        var ne = setInterval(function test() {
+            $.ajax({
+                url: '/ordermanage/new/',
+                async: true,
+                data:{'shop_id': '1', 'num': num, 'flag': flag},
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    num = data.count;
+                    flag = true;
+                    if (data.res == 1) {
+                        doTTS();
+                        alert('您有新订单，请刷新订单页面！');
+                        {#window.location.reload();#}
+                    }
+                    if(!data.status){
+                        clearInterval(ne);
+                    }
+                }
+            })
+        }, 50000000000000);
+    }
+
+    function doTTS() {
+        var ttsDiv = document.getElementById('bdtts_div_id');
+        var ttsAudio = document.getElementById('tts_autio_id');
+        var ttsText = document.getElementById('ttsText').value;
+        // 文字转语音
+        ttsDiv.removeChild(ttsAudio);
+        var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+        var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&per=3&spd=5&text=' + ttsText + '" type="audio/mpeg">';
+        var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+        var au2 = '</audio>';
+        ttsDiv.innerHTML = au1 + sss + eee + au2;
+        ttsAudio = document.getElementById('tts_autio_id');
+        ttsAudio.play();
+    }
+
+    function changestatus(status){
+        $.ajax({
+                url: '/ordermanage/status/',
+                data:{'status': status},
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    alert(data.mes);
+                }
+        })
+    }
+    </script>
+	{# 网页顶部引入文件块 #}
+    {% block topfiles %}{% endblock topfiles %}
+</head>
+<body>
+{# 网页顶部欢迎信息块 #}
+{% block header_con %}
+    <div id="sj_top">
+       <div class="sj_index_top">
+                <a href="{% url 'goods:sj_index' %} "><img src="{% static 'image/logo.gif' %}"></a>
+                <select id="status" name="status" onchange="WebSocketTest();">
+                   <option value ="start" >营业中</option>
+                   <option value ="stop" selected>休息中</option>
+                </select>
+       </div>
+    </div>
+
+    <div style="display: none">
+         <input type="text" id="ttsText" value="您有新订单，请刷新订单页面">
+         <input type="button" id="tts_btn" onclick="doTTS()" value="播放">
+    </div>
+
+    <div id="bdtts_div_id" style="display: none">
+         <audio id="tts_autio_id" autoplay="autoplay">
+           <source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&amp;ie=UTF-8&amp;spd=5&amp;per=1&amp;text=" type="audio/mpeg">
+           <embed id="tts_embed_id" height="0" width="0" src="">
+         </audio>
+    </div>
+{% endblock header_con %}
+
+{% block main %}
+    <div id="main">
+        <nav class="sj_nav">
+           <ul>
+              <li><a href="{% url 'ordermanage:sj_order' '1' %}">订单管理</a></li>
+              <li><a href="{% url 'goodsmanage:sj_cpgl' '1' %}">菜品管理</a></li>
+              <li><a href="{% url 'commentmanage:mess' '1' '1' '1' %}">留言板管理</a></li>
+           </ul>
+
+           <span>注册时间:{{ shop.create_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合评分：<b>{{ shop.shop_score }}</b></span>
+        </nav>
+{% endblock main %}
+{# 网站主体内容块 #}
+{% block body %}{% endblock body %}
+
+{% block endmain %}
+    </div>
+{% endblock endmain %}
+</body>
+<footer>
+   <div class="foot_nav">
+      <a href="{% url 'goods:sj_index' %}">首页</a>|<a href="">外卖</a>|<a href="">中餐</a>|<a href="">西餐</a>|<a href="">水果</a>|<a href="">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</html>

@@ -1,0 +1,233 @@
+{% extends 'mj.html' %}
+{% load staticfiles %}
+{% block title %}立即下单{% endblock title %}
+{% block topfiles %}
+<style type="text/css">.window{
+    width:920px;
+     background-color:#d0def0;
+     position:absolute;
+     padding:2px;
+     margin:5px;
+     display:none;
+     }
+ .content{
+     height:420px;
+     background-color:#FFF;
+     font-size:14px;
+     overflow:auto;
+     }
+     .title{
+         padding:2px;
+         color:#0CF;
+         font-size:14px;
+         }
+ .title img{
+         float:right;
+         }
+ </style>
+<link href="{% static 'css/add_address.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/Popt.js' %}"></script>
+<script src="{% static 'js/cityJson.js' %}"></script>
+<script src="{% static 'js/citySet.js' %}"></script>
+<script type="text/javascript">
+ //获取窗口的高度
+ var windowHeight;
+ //获取窗口的宽度
+ var windowWidth;
+ //获取弹窗的宽度
+ var popWidth;
+ //获取弹窗高度
+ var popHeight;
+ function init(){
+    windowHeight=$(window).height();
+    windowWidth=$(window).width();
+    popHeight=$(".window").height();
+    popWidth=$(".window").width();
+ }
+ //关闭窗口的方法
+ function closeWindow(){
+     $(".title img").click(function(){
+         $(this).parent().parent().hide("slow");
+         });
+}
+//定义弹出居中窗口的方法
+function popCenterWindow(){
+     init();
+     //计算弹出窗口的左上角Y的偏移量
+     var popY=(windowHeight-popHeight)/2;
+     var popX=(windowWidth-popWidth)/2;
+     //alert('jihua.cnblogs.com');
+     //设定窗口的位置
+     $("#center").css("top",popY).css("left",popX).slideToggle("slow");
+     closeWindow();
+}
+</script>
+<script type="text/javascript" language="javascript">
+     $(document).ready(function () {
+         $("#btn_center").click(function () {
+             popCenterWindow();
+         });
+
+     });
+
+     function address_change(address_id, shop_id){
+         $.get('/cart/change/', {'address_id': address_id, 'shop_id': shop_id}, function (data) {
+             if (data.res == 3){
+                 $('#send_price').html('￥'+ data.mesg);
+                 var total = {{ total_goods }} + data.mesg;
+                 $('#con_count').html('￥' + parseFloat(total).toFixed(2));
+                 $('#pay_count').html('￥' + parseFloat(total).toFixed(2))
+             }else{
+                 alert(data.errmsg);
+             }
+         });
+
+     }
+ </script>
+{% endblock topfiles %}
+
+{% block body %}
+<div id="main">
+   <div class="loc_nav"><a href="{% url 'goods:index' %}">首页</a>><a href="/goods/{{ shop.id }}/1/1/1">{{ shop.shop_name }}</a>><a href="">确认购买</a>   </div>
+   <div class="sure_or">
+
+          <div class="sure_list">
+              <div></div>
+              <ul>
+                 <li><span>菜品</span><span>（价格 + 包装费）* 份数</span></li>
+                 {% for sku in sku_info %}
+                        <li><span>{{ sku.name }}</span><span>￥（{{ sku.price }} + {{ sku.pack }}）* {{ sku.unite }}</span></li>
+                 {% endfor %}
+                 <li><span>配送费</span><span id="send_price" name="send_price">￥{{ shop.send_price }}</span></li>
+                 <li><span>合计</span><span id="con_count" name="con_count">￥{{ total }}</span></li>
+              </ul>
+          </div>
+
+          <div class="window" id="center">
+            <div id="title" class="title"><img src=" {% static 'image/close.jpg' %} " alt="关闭" />新增收货地址</div>
+            <div class="content">
+                <form method="post" action="/cart/address/" id="save_address" name="save_address">
+                  <ul>
+                     <li><span>收货人</span><input type="text" name="receiver" id="receiver"></li>
+                     <li><span>所在地区</span><input type="text" name="region" id="region"></li>
+                     <li><span>详细地址</span><input type="text" name="addr" id="addr"></li>
+                     <li><span>手机号码</span><input type="text" name="phone" id="phone"></li>
+                     <li><span>是否设为默认地址</span><input id="default" name="default" type="radio" value="1"  checked/><span>是</span><input id="default" name="default" type="radio" value="0"/><span>否</span></li>
+                  </ul>
+               </form>
+               <button class="agree_btn">保存</button>
+                <script language="javascript" type="text/javascript">
+                    $(".agree_btn").click(function(){
+                        csrf = $('input[name="csrfmiddlewaretoken"]').val();
+                        params = {
+                            'receiver':$('#receiver').val(),
+                            'region':$('#region').val(),
+                            'addr':$('#addr').val(),
+                            'phone':$('#phone').val(),
+                            'default':$('#default').val(),
+                            'csrfmiddlewaretoken':csrf
+                        }
+
+                        $.post('/cart/address/', params, function (data) {
+                            if (data.res == 1){
+                                alert(data.errmsg);
+                            }else{
+                                window.location.reload();
+                            }
+
+                        });
+                    });
+                </script>
+            </div>
+          </div>
+
+          <div class="sure_xx">
+             <p>送餐详情</p>
+            <div class="row" id="myVue"  v-cloak>
+                        <ul>
+                            <li><span class="addAddress" type="button" id="btn_center" >新增收货地址</span> </li>
+{#                            <li style="display: none">#}
+{#                                <el-row>#}
+{#                                    <span class="addAddress" @click="AddressShowClick">新增收货地址</span>#}
+{#                                </el-row>#}
+{#                                    <el-dialog#}
+{#                                        title="新增收货地址"#}
+{#                                        :visible.sync="newAddressShow"#}
+{#                                        width="30%"#}
+{#                                        >#}
+{#                                        <script language="javascript" type="text/javascript">#}
+{#                                        $(document).ready(function() {#}
+{#                                          $(".el-dialog__close").text("关闭");#}
+{#                                        });#}
+{#                                        </script>#}
+{#                                        <el-form ref="form" :model="form" label-width="80px">#}
+{#                                            <el-form-item label="收货人" >#}
+{#                                                <el-input v-model="form.name" placeholder="请输入内容"></el-input>#}
+{#                                            </el-form-item>#}
+{#                                            <el-form-item label="所在地区" >#}
+{#                                                <el-input v-model="form.city" placeholder="请输入内容"></el-input>#}
+{#                                            </el-form-item>#}
+{#                                            <el-form-item label="详细地址" >#}
+{#                                                <el-input v-model="form.minarea" placeholder="请输入内容"></el-input>#}
+{#                                            </el-form-item>#}
+{#                                            <el-form-item label="手机号码" >#}
+{#                                                <el-input v-model="form.phone" placeholder="请输入内容"></el-input>#}
+{#                                            </el-form-item>#}
+{#                                            <el-form-item>#}
+{#                                                <el-checkbox-group v-model="form.isShowDefult">#}
+{#                                                    <el-checkbox  label="设为默认地址" name="type">设为默认地址</el-checkbox>#}
+{#                                                </el-checkbox-group>#}
+{#                                            </el-form-item>#}
+{#                                        </el-form>#}
+{#                                        <span slot="footer" class="dialog-footer">#}
+{#                                            <el-button @click="dialogVisible = false" type='danger'>取 消</el-button>#}
+{#                                            <el-button type="button" @click="saveNewAdress(edmitType)">保存</el-button>#}
+{#                                        </span>#}
+{#                                    </el-dialog>#}
+{#                            </li>#}
+                        </ul>
+            </div>
+            <script type="text/javascript" src="{% static 'js/vue/vue.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/eleme-ui/index.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/ShoppingCart.js' %}"></script>
+             <select id="addresses" name="addresses" onchange="address_change(this.options[this.options.selectedIndex].value, {{ shop.id }});">
+                 {% for address in address_info %}
+                <option id="select_addr" name="select_addr" value="{{ address.id }}" >{{ address.addr }} {{ address.receiver }} {{ address.phone }}</option>
+                 {% endfor %}
+             </select>
+              <form id="order_generate" name="order_generate" method="post" action="/order/generate/">
+                {% csrf_token %}
+                  <input style="display: none" id="address" name="address" value="">
+                  <input style="display: none" id="sku_ids" name="sku_ids" value="">
+                  <input style="display: none" id="shop_id" name="shop_id" value="{{ shop.id }}">
+                <ul>
+                   <li>
+                      <span>我要留言：</span><input id="remarks" name="remarks" type="text" placeholder="少辣 加米饭">
+                   </li>
+                   <li>
+                      <span>发票信息：</span><input id="invoice_head" name="invoice_head" type="text" placeholder="输入发票抬头">
+                   </li>
+                   <li>
+                      <span>发票信息：</span><input id="taxpayer_number" name="taxpayer_number" type="text" placeholder="输入纳税人识别号">
+                   </li>
+                </ul>
+              </form>
+             <div class="go_pay">
+                <span>您需要支付：<b id="pay_count" name="pay_count">￥{{ total }}</b></span><button class="go_pay">去付款</button>
+
+             </div>
+          </div>
+          <div class="clr"></div>
+
+   </div>
+    <script language="javascript" type="text/javascript">
+        $(".go_pay").click(function(){
+            document.getElementById("address").value = $("#select_addr").val()
+            document.getElementById("sku_ids").value = window.location.search
+            $("#order_generate").submit();
+            // window.location.href="wm_pay.html";
+        });
+    </script>
+</div>
+{% endblock %}

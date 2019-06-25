@@ -1,0 +1,170 @@
+{% extends 'sj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-留言管理{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+   $('.liuyan_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300;
+		//给菜单添加选择样式
+	    $(this).addClass('ly_active').siblings().removeClass('ly_active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.liuyan_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script>
+{% endblock topfiles %}
+{% block body %}
+
+    <div class="liuyan_title">
+       <h3>留言板</h3>
+       <span>好评度:<b>{{ rate }}</b></span>
+    </div>
+    <div class="liuyan_man">
+        <ul class="ly_tab">
+             <li class="ly_active">好评</li><li>中评</li><li>差评</li>
+        </ul>
+
+       <div class="ly_con1">
+         <table>
+             <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr>
+             {% for a in order_info_a.info %}
+             <tr>
+                 <td class="user_tx">
+                <img src="{{ a.user.image }}">
+                </td>
+                 <td>{{ a.user.real_name }}</td>
+                 <td>{{ a.create_time }}</td>
+                 <td>
+                     {% for good in a.goods %}
+                         <li>{{ good.sku.name }} X {{ good.count }}</li>
+                     {% endfor %}
+                 </td>
+                 <td class="user_st">
+                     {% for im in a.image_list %}
+                   <img src="{{ im.image }}">
+                     {% empty %}
+                   <img src="{{ a.image }}">
+                     {% endfor %}
+                 </td>
+                 <td>{{ a.comment }}</td>
+             </tr>
+             {% endfor order_info_a %}
+         </table>
+
+           <div class="pagenation">
+               {% if order_info_a.info.has_previous %}
+                   <a href="{% url 'commentmanage:mess' order_info_a.info.previous_page_number '1' '1' %}">< 上一页</a>
+               {% endif %}
+               {% for pindex in order_info_a.pages %}
+                   {% if pindex == order_info_a.info.number %}
+                       <a href="{% url  'commentmanage:mess' pindex   '1' '1'   %}" class="active">{{ pindex }}</a>
+                   {% else %}
+                       <a href="{% url  'commentmanage:mess' pindex  '1' '1'  %}">{{ pindex }}</a>
+                   {% endif %}
+               {% endfor %}
+               {% if order_info_a.info.has_next %}
+                   <a href="{% url  'commentmanage:mess' order_info_a.info.next_page_number  '1' '1' %}">下一页 ></a>
+               {% endif %}
+           </div>
+
+       </div>
+
+       <div class="ly_con2">
+         <table>
+             <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr>
+             {% for b in order_info_b.info %}
+             <tr>
+                 <td class="user_tx">
+                <img src="{{ b.user.image }}">
+                </td>
+                 <td>{{ b.user.real_name }}</td>
+                 <td>{{ b.create_time }}</td>
+                 <td>
+                     {% for good in b.goods %}
+                         <li>{{ good.sku.name }} X {{ good.count }}</li>
+                     {% endfor %}
+                 </td>
+                 <td class="user_st">
+                     {% for im in b.image_list %}
+                   <img src="{{ im.image }}">
+                     {% empty %}
+                   <img src="{{ b.image }}">
+                     {% endfor %}
+                 </td>
+                 <td>{{ b.comment }}</td>
+             </tr>
+             {% endfor order_info_b %}
+         </table>
+
+           <div class="pagenation">
+               {% if order_info_b.info.has_previous %}
+                   <a href="{% url 'commentmanage:mess' '1' order_info_b.info.previous_page_number '1' %}">< 上一页</a>
+               {% endif %}
+               {% for pindex in order_info_b.pages %}
+                   {% if pindex == order_info_b.info.number %}
+                       <a href="{% url  'commentmanage:mess' '1' pindex '1'   %}" class="active">{{ pindex }}</a>
+                   {% else %}
+                       <a href="{% url  'commentmanage:mess' '1' pindex '1'  %}">{{ pindex }}</a>
+                   {% endif %}
+               {% endfor %}
+               {% if order_info_b.info.has_next %}
+                   <a href="{% url  'commentmanage:mess' '1' order_info_b.info.next_page_number '1' %}">下一页 ></a>
+               {% endif %}
+           </div>
+
+       </div>
+
+       <div class="ly_con3">
+         <table>
+             <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr>
+             {% for c in order_info_c.info %}
+             <tr>
+                 <td class="user_tx">
+                <img src="{{ c.user.image }}">
+                </td>
+                 <td>{{ c.user.real_name }}</td>
+                 <td>{{ c.create_time }}</td>
+                 <td>
+                     {% for good in c.goods %}
+                         <li>{{ good.sku.name }} X {{ good.count }}</li>
+                     {% endfor %}
+                 </td>
+                 <td class="user_st">
+                     {% for im in c.image_list %}
+                   <img src="{{ im.image }}">
+                     {% empty %}
+                   <img src="{{ c.image }}">
+                     {% endfor %}
+                 </td>
+                 <td>{{ c.comment }}</td>
+             </tr>
+             {% endfor order_info_c %}
+         </table>
+
+           <div class="pagenation">
+               {% if order_info_c.info.has_previous %}
+                   <a href="{% url 'commentmanage:mess' '1' '1' order_info_c.info.previous_page_number %}">< 上一页</a>
+               {% endif %}
+               {% for pindex in order_info_c.pages %}
+                   {% if pindex == order_info_c.info.number %}
+                       <a href="{% url  'commentmanage:mess' '1' '1' pindex %}" class="active">{{ pindex }}</a>
+                   {% else %}
+                       <a href="{% url  'commentmanage:mess' '1' '1' pindex %}">{{ pindex }}</a>
+                   {% endif %}
+               {% endfor %}
+               {% if order_info_c.info.has_next %}
+                   <a href="{% url  'commentmanage:mess' '1' '1' order_info_c.info.next_page_number %}">下一页 ></a>
+               {% endif %}
+           </div>
+
+       </div>
+
+       
+    </div>
+</div>
+
+{% endblock body %}

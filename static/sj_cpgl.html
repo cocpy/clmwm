@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-菜品管理</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="sj_top">
+   <div class="sj_index_top">
+            <a href="index.html"><img src="image/logo.gif"></a>
+            <select>
+               <option value ="营业中">营业中</option>
+               <option value ="休息中">休息中</option>
+            </select>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分-->
+<div id="main">
+   <div class="loc_nav"><a href="index.html">首页</a>><a href="sj_cpgl.html">菜品管理</a></div>
+   <div class="add_cp">
+      <h3>添加菜品</h3>
+       <form>
+          <ul>
+             <li><span>商品名称<input type="text"></span><span>商品价格<input type="text"></span></li>
+             <li><span>餐盒价格<input type="text"></span><span>商品库存<input type="text"></span></li>
+             <li><span>商品图片</span>
+                <div class="img_yulan">
+                   <img id="preview" />
+                </div>
+                <script type="text/javascript">
+                  function imgPreview(fileDom){
+                      //判断是否支持FileReader
+                      if (window.FileReader) {
+                          var reader = new FileReader();//创建filereader对象
+                      } else {
+                          alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+                      }
+                      //获取文件
+                      var file = fileDom.files[0];
+                      //读取完成
+                      reader.onload = function(e) {
+                          //获取图片dom
+                          var img = document.getElementById("preview");
+                          //图片路径设置为读取的图片
+                          img.src = e.target.result;
+                      };
+                      reader.readAsDataURL(file);
+                  }
+              </script>
+                <input type="file" name="file" onchange="imgPreview(this)">
+             </li>
+          </ul>
+       </form>
+       <button>点击上架</button>
+       <div class="cp_list">
+         <table>
+              <tr><td width="17%">商品名称</td><td width="7%">商品价格</td><td width="7%">餐盒价格</td><td width="7%">无限</td><td width="15%">商品分类</td><td width="15%">图片展示</td><td width="32%">菜品管理</td></tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+             <tr><td>兰州炒饭</td><td>15</td><td>1.4</td><td>无限</td>
+             <td>
+                <select>
+                  <option value ="炒饭类">炒饭类</option>
+                  <option value ="炒面类">炒面类</option>
+                  <option value ="汤面类">汤面类</option>
+               </select>
+             </td>
+             <td>
+                <img src="image/cf.jpg">
+             </td>
+             <td>
+                <button class="cpup_btn">点击修改</button><button>删除</button>
+             </td>
+             
+             </tr>   
+         </table>
+         <script language="javascript" type="text/javascript">
+            $(".cpup_btn").click(function(){
+				   window.location.href="sj_cpgl_update.html";
+				})
+         </script>
+         <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+       </div> 
+   </div>
+</div>
+<!--中间部分-->
+<!--底部-->
+<footer id="sj_footer1">
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+<!--底部-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+{% load staticfiles %}
+<head>
+<meta charset="utf-8">
+<title>吃了么-商家注册</title>
+<link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script language="JavaScript">
+    function turnType() {
+        var dnsname = $('#bus_style').val()
+        var type_detail
+        if (dnsname == '0'){
+          type_detail = 'C'
+
+        }else if(dnsname == '1'){
+          type_detail = 'W'
+
+        }else{
+
+        }
+
+        getTypeDetail(type_detail)
+    }
+    function getTypeDetail(type_detail) {
+
+      $.ajax({
+         url: '/user/type_detail',
+         data:{'type_detail':type_detail},
+         type: 'GET',
+         dataType: 'json',
+         success: function (data) {
+             var content='';
+             $.each(data, function(i, item){
+                 content+='<option value='+item.fields.type_code+'>'+item.fields.type_name+'</option>'
+             });
+             $('#hostnames').html(content)
+         },
+      });
+    }
+</script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+   </div>
+   <div class="login_logo">
+      <a href="index.html"><img src="{% static 'image/logo.gif' %}"></a>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间注册-->
+<div id="register_sj">
+   <form method="post" action="/user/sj_register" enctype="multipart/form-data" id="sj_register" name="sj_register">
+	       {% csrf_token %}
+	      <ul>
+	         <li><span>店铺名称</span><input type="text" id="shop_name" name="shop_name"></li>
+	         <li><span>主营类型</span>{# <input name="bus_style" id="bus_style" type="radio" value="0"  checked/><span>中餐</span><input name="bus_style" type="radio" value="1"/><span>西餐</span><input name="bus_style" type="radio" value="2"/><span>水果</span><input name="bus_style" type="radio" value="3"/><span>饮品</span></li>#}
+	            <select name="bus_style" id="bus_style" onchange="turnType();">
+	                    <option></option>
+	                    <option value="0">中餐</option>
+	                    <option value="1">西餐</option>
+	                    <option value="2">水果</option>
+	                    <option value="3">饮品</option>
+	            </select>
+	         </li>
+	         <li><span>具体类型</span>
+	             <select name="selhostipaddrs" id="hostnames"></select>
+	         </li>
+	          <li>
+	             <span>营业时间</span>
+	             <span><input type="time" id="receive_start" name="receive_start"></span>
+	             <span>至</span>
+	             <span><input type="time" id="receive_end" name="receive_end"></span>
+	         </li>
+	         <li><span>店铺地址</span><textarea placeholder="请填写详细地址" name="shop_addr" id="shop_addr"></textarea></li>
+	         <li><span>起送价格</span><input type="text" id="shop_price" name="shop_price"></li>
+
+	         <li><span>店铺头像</span>
+	                 <div class="img_yulan">
+	                    <img id="preview" />
+	                 </div>
+	                   <script type="text/javascript">
+	                    function imgPreview(fileDom){
+	                        //判断是否支持FileReader
+	                        if (window.FileReader) {
+	                            var reader = new FileReader();//创建filereader对象
+	                        } else {
+	                            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+	                        }
+	                        //获取文件
+	                        var file = fileDom.files[0];
+	                        //读取完成
+	                        reader.onload = function(e) {
+	                            //获取图片dom
+	                            var img = document.getElementById("preview");
+	                            //图片路径设置为读取的图片
+	                            img.src = e.target.result;
+	                        };
+	                        reader.readAsDataURL(file);
+	                    }
+	                </script>
+	                <input type="file" name="shop_file" id="shop_file" onchange="imgPreview(this)">
+	         </li>
+	         <li style="display:none"><input type="text" id="shop_user" name="shop_user" value="{{ user }}"></li>
+	      </ul>
+	{#       <input type="submit" class="agree_btn" value="同意以下协议并注册">#}
+	   </form>
+	   <button class="agree_btn">同意以下协议并注册</button>
+	    <script language="javascript" type="text/javascript">
+	        $(".agree_btn").click(function(){
+	            $("#sj_register").submit();
+	        });
+	    </script>
+	</div>
+	{{ errmsg }}
+	<!--中间注册-->
+	<footer id="sj_footer">
+	   <div class="foot_nav">
+	      <a href={% static 'index.html' %}>首页</a>|<a href={% static 'wm_index.html' %}>外卖</a>|<a href="{% static 'wm_index.html' %}">中餐</a>|<a href="{% static 'wm_index.html' %}">西餐</a>|<a href="{% static 'wm_index.html' %}">水果</a>|<a href={% static 'wm_index.html' %}>饮品</a>
+	   </div>
+	   <div class="copy_ri">
+	         <p>吉林省明日科技有限公司Copyright ©2007-2016, All Rights Reserved 吉ICP备10002740号-2 </p>
+	         <img src=""></div>
+	   </div>
+	</footer>
+	</body>
+	</html>

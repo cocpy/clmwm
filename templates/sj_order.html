@@ -1,0 +1,346 @@
+{% extends 'sj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-订单管理{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+   $('.sj_order_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300;
+		//给菜单添加选择样式
+	    $(this).addClass('active').siblings().removeClass('active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.sj_order_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script>
+{% endblock topfiles %}
+{% block body %}
+
+    <div class="sj_name">
+       <h2><span>店铺名称：</span>{{ shop.shop_name }}</h2>
+    </div>
+    <div class="sj_order_man">
+       <ul class="sj_menu">
+          <li  class="active">待审核订单</li><li>已审核订单</li><li>进行中订单</li><li>配送中订单</li><li>已完成订单</li><li>已取消订单</li>
+       </ul>
+
+       <div class="order_list1">
+         <table>
+             <tr>
+                 <td width="11%">下单时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="6%">金额+运费</td>
+                 <td width="22%">备注</td>
+                 <td width="22%">是否接单</td>
+             </tr>
+             {% for exam in order_exam.info %}
+             <tr>
+                 <td>{{ exam.create_time }}</td>
+                 <td>{{ exam.addr.receiver }}</td>
+                 <td>{{ exam.addr.phone }}</td>
+                 <td>{{ exam.addr.addr }}</td>
+                 <td>
+                     {% for good in order_exam.goods %}
+                         {% if good.order == exam %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ exam.total_price }}+{{ exam.transit_price }}</td>
+                 <td>{{ exam.remarks }}</td>
+                 <td>
+                     <button><a href="{% url 'ordermanage:receive' '3' exam.order_id %}">接受</a></button>
+                     <button><a href="{% url 'ordermanage:refuse' exam.order_id %}">拒绝</a></button>
+                 </td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_exam.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_exam.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_exam.pages %}
+                 {% if pindex == order_exam.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_exam.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_exam.info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+         </div>
+       </div>
+
+       <div class="order_list6">
+         <table>
+             <tr>
+                 <td width="11%">下单时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="10%">金额+运费</td>
+                 <td width="23%">备注</td>
+                 <td width="15%">状态</td>
+             </tr>
+             {% for pass in order_pass.info %}
+             <tr>
+                 <td>{{ pass.create_time }}</td>
+                 <td>{{ pass.addr.receiver }}</td>
+                 <td>{{ pass.addr.phone }}</td>
+                 <td>{{ pass.addr.addr }}</td>
+                 <td>
+                     {% for good in order_pass.goods %}
+                         {% if good.order == pass %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ pass.total_price }}+{{ pass.transit_price }}</td>
+                 <td>{{ pass.remarks }}</td>
+                 <td>
+                     <button><a href="{% url 'ordermanage:receive' '4' pass.order_id %}">有骑手接单</a></button>
+                 </td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_pass.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_pass.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_pass.pages %}
+                 {% if pindex == order_pass.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_pass.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_pass.info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+         </div>
+       </div>
+
+       <div class="order_list2">
+         <table>
+             <tr>
+                 <td width="11%">下单时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="6%">金额+运费</td>
+                 <td width="22%">备注</td>
+                 <td width="22%">状态</td>
+             </tr>
+             {% for conduct in order_conduct.info %}
+             <tr>
+                 <td>{{ conduct.create_time }}</td>
+                 <td>{{ conduct.addr.receiver }}</td>
+                 <td>{{ conduct.addr.phone }}</td>
+                 <td>{{ conduct.addr.addr }}</td>
+                 <td>
+                     {% for good in order_conduct.goods %}
+                         {% if good.order == conduct %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ conduct.total_price }}+{{ conduct.transit_price }}</td>
+                 <td>{{ conduct.remarks }}</td>
+                 <td>
+                    <button><a href="{% url 'ordermanage:receive' '5' conduct.order_id %}">骑手已取货</a></button>
+                 </td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_conduct.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_conduct.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_conduct.pages %}
+                 {% if pindex == order_conduct.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_conduct.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_conduct.info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+         </div>
+       </div>
+
+       <div class="order_list3">
+         <table>
+             <tr>
+                 <td width="11%">下单时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="6">金额+运费</td>
+                 <td width="22">备注</td>
+                 <td width="5%">催单</td>
+                 <td width="17%">订单状态</td>
+             </tr>
+			 {% for delivery in order_delivery.info %}
+             <tr>
+                 <td>{{ delivery.create_time }}</td>
+                 <td>{{ delivery.addr.receiver }}</td>
+                 <td>{{ delivery.addr.phone }}</td>
+                 <td>{{ delivery.addr.addr }}</td>
+                 <td>
+                     {% for good in order_delivery.goods %}
+                         {% if good.order == delivery %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ delivery.total_price }}+{{ delivery.transit_price }}</td>
+                 <td>{{ delivery.remarks }}</td>
+                 <td>催单0次</td>
+                 <td>
+                    <button><a href="{% url 'ordermanage:receive' '6' delivery.order_id %}">已送达</a></button>
+                 </td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_delivery.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_delivery.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_delivery.pages %}
+                 {% if pindex == order_delivery.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_delivery.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_delivery.info.next_page_number %}"> 下一页></a>
+            {% endif %}
+         </div>
+       </div>
+
+       <div class="order_list4">
+         <table>
+             <tr>
+                 <td width="11%">完成时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="6%">金额+运费</td>
+                 <td width="5%">状态</td>
+                 <td width="14%">备注</td>
+                 <td width="15%">评价</td>
+             </tr>
+			 {% for finish in order_finish.info %}
+             <tr>
+                 <td>{{ finish.create_time }}</td>
+                 <td>{{ finish.addr.receiver }}</td>
+                 <td>{{ finish.addr.phone }}</td>
+                 <td>{{ finish.addr.addr }}</td>
+                 <td>
+                     {% for good in order_finish.goods %}
+                         {% if good.order == finish %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ finish.total_price }}+{{ finish.transit_price }}</td>
+                 <td>已完成</td>
+                 <td>{{ finish.remarks }}</td>
+                 <td>{{ finish.comment }}</td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_finish.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_finish.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_finish.pages %}
+                 {% if pindex == order_finish.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_finish.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_finish.info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+         </div>
+       </div>
+
+       <div class="order_list5">
+         <table>
+			 <tr>
+                 <td width="11%">下单时间</td>
+                 <td width="5%">姓名</td>
+                 <td width="9%">电话</td>
+                 <td width="15%">地址</td>
+                 <td width="10%">餐品</td>
+                 <td width="6%">金额+运费</td>
+                 <td width="14">备注</td>
+                 <td width="5%">状态</td>
+                 <td width="10%">支付状态</td>
+             </tr>
+			 {% for cancel in order_cancel.info %}
+             <tr>
+                 <td>{{ cancel.create_time }}</td>
+                 <td>{{ cancel.addr.receiver }}</td>
+                 <td>{{ cancel.addr.phone }}</td>
+                 <td>{{ cancel.addr.addr }}</td>
+                 <td>
+                     {% for good in order_cancel.goods %}
+                         {% if good.order == cancel %}
+                            <li>{{ good.sku.name }}X{{ good.count }}</li>
+                         {% endif %}
+                     {% endfor %}
+                 </td>
+                 <td>{{ cancel.total_price }}+{{ cancel.transit_price }}</td>
+                 <td>{{ cancel.remarks }}</td>
+                 <td>已拒接</td>
+                 <td>已退款</td>
+             </tr>
+             {% endfor %}
+         </table>
+         <div class="pagenation">
+            {% if order_cancel.info.has_previous %}
+				<a href="{% url 'ordermanage:sj_order' order_cancel.info.previous_page_number %}">< 上一页 </a>
+            {% endif %}
+
+            {% for pindex in order_cancel.pages %}
+                 {% if pindex == order_cancel.info.number %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'ordermanage:sj_order' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if order_cancel.info.has_next %}
+			    <a href="{% url 'ordermanage:sj_order' order_cancel.info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+         </div>
+       </div>
+    </div>
+
+{% endblock body %}

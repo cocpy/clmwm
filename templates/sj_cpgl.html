@@ -1,0 +1,118 @@
+{% extends 'sj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-菜品管理{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+   $('.sj_order_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300;
+		//给菜单添加选择样式
+	    $(this).addClass('active').siblings().removeClass('active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.sj_order_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script>
+{% endblock topfiles %}
+{% block body %}
+
+   <div class="add_cp">
+      <h3>添加菜品</h3>
+       <form method="post" enctype="multipart/form-data" id="sj_cogl" name="sj_cpgl">
+           {% csrf_token %}
+          <ul>
+             <li><span>商品名称<input type="text" id="name" name="name"></span><span>商品价格<input type="text" id="price" name="price"></span></li>
+             <li><span>餐盒价格<input type="text" id="pack" name="pack"></span><span>商品库存<input type="text" id="stock" name="stock"></span></li>
+             <li><span>商品类型<input type="text" id="type" name="type"></span></li>
+              <li><span>商品图片</span></li>
+              <li>
+                <div class="img_yulan">
+                   <img id="preview" />
+                </div>
+                <script type="text/javascript">
+                  function imgPreview(fileDom){
+                      //判断是否支持FileReader
+                      if (window.FileReader) {
+                          var reader = new FileReader();//创建filereader对象
+                      } else {
+                          alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+                      }
+                      //获取文件
+                      var file = fileDom.files[0];
+                      //读取完成
+                      reader.onload = function(e) {
+                          //获取图片dom
+                          var img = document.getElementById("preview");
+                          //图片路径设置为读取的图片
+                          img.src = e.target.result;
+                      };
+                      reader.readAsDataURL(file);
+                  }
+              </script>
+                <input type="file" name="file" onchange="imgPreview(this)">
+             </li>
+          </ul>
+{#           <input type="submit" class="agree_btn" value="点击上架">#}
+       </form>
+       <button class="agree_btn">点击上架</button>
+       <script language="javascript" type="text/javascript">
+            $(".agree_btn").click(function(){
+                $("#sj_cogl").submit();
+            });
+        </script>
+       {{ errmsg }}
+       {{ success }}
+       <div class="cp_list">
+         <table>
+              <tr>
+                  <td width="17%">商品名称</td>
+                  <td width="7%">商品价格</td>
+                  <td width="7%">餐盒价格</td>
+                  <td width="7%">库存</td>
+                  <td width="15%">商品分类</td>
+                  <td width="15%">图片展示</td>
+                  <td width="32%">菜品管理</td>
+              </tr>
+                {% for item in info %}
+             <tr>
+                 <td>{{ item.name }}</td>
+                 <td>{{ item.price }}</td>
+                 <td>{{ item.pack }}</td>
+                 <td>{{ item.stock }}</td>
+                 <td>{{ item.type }}
+                 </td>
+                 <td>
+                    <img src="{{ item.image}}">
+                 </td>
+                 <td>
+                    <button class="cpup_btn"><a href="{% url 'goodsmanage:sj_cpgl_update' item.id %}">点击修改</a></button>
+                    <button><a href="{% url 'goodsmanage:update_del' item.id %}" onclick="if(confirm('是否确认删除?')){return true;}else{return false;}">删  除</a></button>
+                 </td>
+             </tr>
+                {% endfor %}
+
+         </table>
+
+         <div class="pagenation">
+            {% if info.has_previous %}
+				<a href="{% url 'goodsmanage:sj_cpgl' info.previous_page_number %}"> < 上一页</a>
+            {% endif %}
+
+            {% for pindex in pages %}
+                 {% if pindex == info.number %}
+				     <a href="{% url 'goodsmanage:sj_cpgl' pindex %}" class="active">{{ pindex }}</a>
+                 {% else %}
+				     <a href="{% url 'goodsmanage:sj_cpgl' pindex %}">{{ pindex }}</a>
+                 {% endif %}
+			{% endfor %}
+
+            {% if info.has_next %}
+			    <a href="{% url 'goodsmanage:sj_cpgl' info.next_page_number %}"> 下一页 ></a>
+            {% endif %}
+		</div>
+       </div>
+   </div>
+{% endblock body %}

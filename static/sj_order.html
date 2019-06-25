@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-订单管理</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(function () {
+   $('.sj_order_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300; 
+		//给菜单添加选择样式
+	    $(this).addClass('active').siblings().removeClass('active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.sj_order_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script> 
+<!--顶部开始-->
+<div id="sj_top">
+   <div class="sj_index_top">
+            <a href="index.html"><img src="image/logo.gif"></a>
+            <select>
+               <option value ="营业中">营业中</option>
+               <option value ="休息中">休息中</option>
+            </select>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分-->
+<div id="main">
+    <nav class="sj_nav">
+       <ul>
+          <li><a href="sj_order.html">订单管理</a></li>          
+          <li><a href="sj_cpgl.html">菜品管理</a></li>          
+          <li><a href="sj_mess.html">留言板管理</a></li>          
+       </ul>
+       
+       <span>注册时间:2019.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合评分：<b>95分</b></span>
+    </nav>
+    <div class="sj_name">
+       <h2><span>店铺名称：</span>中国兰州牛肉拉面</h2>
+    </div>
+    <div class="sj_order_man">
+       <ul class="sj_menu">
+          <li  class="active">待审核订单</li><li>进行中订单</li><li>配送中订单</li><li>已完成订单</li><li>已取消订单</li>
+       </ul>
+         <div class="order_list1">
+         <table>
+              <tr><td width="13%">送餐时间</td><td width="11%">下单时间</td><td width="9%">顾客手机</td><td width="30%">送餐地址</td><td width="10%">餐品</td><td width="5%">金额</td><td width="22%">菜品管理</td></tr>   
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                <button>接受</button><button>拒绝</button>
+             </td>
+             </tr> 
+         </table>
+         <div class="cp_fenye">
+          <span>当前显示：</span>
+          <a href="#">20</a><a href="#">30</a><a href="#">200</a>
+          <span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div> 
+       <div class="order_list2">
+         <table>
+              <tr><td width="13%">送餐时间</td><td width="11%">下单时间</td><td width="9%">顾客手机</td><td width="30%">送餐地址</td><td width="10%">餐品</td><td width="5%">金额</td><td width="22%">状态</td></tr>   
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>16</td>
+             <td>
+                骑手接单，取货中
+             </td>
+             </tr> 
+         </table>
+                  <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div> 
+       <div class="order_list3">
+         <table>
+              <tr><td width="13%">送餐时间</td><td width="11%">下单时间</td><td width="9%">顾客手机</td><td width="30%">送餐地址</td><td width="10%">餐品</td><td width="5%">催单</td><td width="22%">订单状态</td></tr>   
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td>
+             <td>牛肉拉面</td>
+             <td>催单2次</td>
+             <td>
+                配送中，等待客户签收
+             </td>
+             </tr> 
+         </table>
+                  <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div>        
+       <div class="order_list4">
+         <table>
+              <tr><td width="13%">送餐时间</td><td width="11%">顾客手机</td><td width="25%">送餐地址</td><td width="11%">餐品</td><td width="5%">金额</td><td width="5%">状态</td><td width="30%">订单评价</td></tr>   
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                很好吃很好吃，很好吃很好吃，很好吃很好吃，很好吃很
+             </td>
+             </tr> 
+         </table>
+                  <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div>        
+       <div class="order_list5">
+         <table>
+              <tr><td width="13%">送餐时间</td><td width="16%">顾客手机</td><td width="35%">送餐地址</td><td width="11%">餐品</td><td width="5%">金额</td><td width="5%">状态</td><td width="25%">支付状态</td></tr>   
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                已支付，正在退款
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                已支付，正在退款
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                已支付，正在退款
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                未支付
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                未支付
+             </td>
+             </tr> 
+             <tr><td>2019.1.14 10:04</td><td>13755652856</td><td>长春市二道区</td><td>牛肉拉面</td>
+             <td>16</td>
+             <td>已完成</td>
+             <td>
+                未支付
+             </td>
+             </tr> 
+         </table>
+         <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+       </div>        
+    </div>
+</div>
+<!--中间部分-->
+<!--底部-->
+<footer id="sj_footer1">
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+<!--底部-->
+</body>
+</html>

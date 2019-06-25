@@ -1,0 +1,114 @@
+<!doctype html>
+{% extends 'mj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么{% endblock title %}
+{% block topfiles %}
+<link href="{% static 'css/add_address.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/Popt.js' %}"></script>
+<script src="{% static 'js/cityJson.js' %}"></script>
+<script src="{% static 'js/citySet.js' %}"></script>
+<script>
+window.onload = function(){
+   var endTime = new Date().getTime() + 900*1000; // 最终毫秒
+   setInterval(clock,1000); // 开启定时器
+   function clock(){
+    var nowTime = new Date();
+    var second = parseInt((endTime - nowTime.getTime()) / 1000);
+    var m = parseInt(second / 60 );
+    var s = parseInt(second % 60); // 当前的秒
+    console.log(s);
+    m<10 ? m="0"+m : m;
+    s<10 ? s="0"+s : s;
+    document.getElementById("time_down").innerHTML = "<img src=\"{% static 'image/warn.png' %}\">请在<b>"+m+":"+s+"</b>内完成支付，超时订单会自动取消";
+   }
+}
+
+function order_check() {
+    order_id = $(this).attr('order_id');
+    csrf = $('input[name="csrfmiddlewaretoken"]').val();
+    params = {'order_id':order_id, 'csrfmiddlewaretoken':csrf};
+    $.post('/order/check/', params, function (data){
+        if (data.res == 3){
+            // 重定向页面
+            window.location.href="http://127.0.0.1:8000/order/success/" + order_id;
+        }
+        else{
+            alert(data.errmsg);
+        }
+    })
+}
+</script>
+{% endblock topfiles %}
+
+{% block body %}
+<div id="main">
+   <div class="pay_warn">
+      <span id="time_down"></span>
+   </div>
+   <div class="pay_title">
+      <span>店铺:{{ shop.shop_name }}   订单号:{{ order.order_id }}</span>
+      <span>应付金额:<b>￥{{ total_all }}</b></span>
+   </div>
+   <div class="pay_con">
+      <form action="/order/pay/" method="post" id="wm_pay" name="wm_pay">
+          {% csrf_token %}
+         <input type="text" name="order_id" id="order_id" style="display: none" value="{{ order.order_id }}">
+          <input type="radio" name="pay" value="微信支付" id="wx_pay">
+            <label for="wx_pay"><img src="{% static 'image/wx_icon.png' %}">微信支付</label>
+          <input type="radio" name="pay" value="支付宝支付" checked id="zfb_pay">
+            <label for="zfb_pay"><img src="{% static 'image/zfb.png' %}">支付宝支付</label>
+      </form>
+      <div class="pay_state">
+         <span>支付<b>￥{{ total_all }}</b></span>
+         <div class="pay_a">
+             <a href="{% url 'goods:index' %}">回到首页</a>
+             <a href="/goods/{{ shop.id }}/1/1/1">重新下单</a>
+             <button id="go_pay" name="go_pay" order_id="{{ order.order_id }}" status="{{ order.order_status }}">去付款</button>
+{#             <button id="order_check" name="order_check" onclick="order_check();" order_id="{{ order.order_id }}">已支付</button>#}
+            <script language="javascript" type="text/javascript">
+                $("#go_pay").click(function () {
+                    // 获取status
+                    status = $(this).attr('status');
+                    // 获取订单id
+                    order_id = $(this).attr('order_id');
+                    if (status == 1){
+                        // 进行支付
+                        csrf = $('input[name="csrfmiddlewaretoken"]').val();
+                        // 组织参数
+                        params = {'order_id':order_id, 'csrfmiddlewaretoken':csrf};
+                        // 发起ajax post请求，访问/order/pay, 传递参数:order_id
+                        $.post('/order/pay/', params, function (data) {
+                            if (data.res == 3){
+                                // 引导用户到支付页面
+                                window.open(data.pay_url)
+                                // 浏览器访问/order/check, 获取支付交易的结果
+                                // ajax post 传递参数:order_id
+                                $.post('/order/check/', params, function (data){
+                                    if (data.res == 3){
+                                        alert('支付成功')
+                                        // 重定向页面
+                                        window.location.href="http://127.0.0.1:8000/order/success/" + order_id;
+                                    }
+                                    else{
+                                        alert(data.errmsg)
+                                    }
+                                })
+                            }
+                            else{
+                                alert(data.errmsg)
+                            }
+                        })
+                    }
+                    else if (status == 4){
+                        // 其他情况
+                        alert('跳转到评价页面')
+                        location.href = '/order/comment/'+order_id
+                    }
+                })
+            </script>
+         </div>
+      </div>	
+   </div>
+</div>
+{% endblock %}

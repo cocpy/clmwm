@@ -1,0 +1,51 @@
+{% extends 'mj.html'%}
+{% load staticfiles %}
+{% block title %}吃了么-登录{% endblock title %}
+{% block topfiles %}
+<script language="javascript" type="text/javascript">
+    function submitlogin(){
+        document.getElementById("login").submit();
+    }
+</script>
+{% endblock topfiles %}
+
+{% block header_con %}
+<div id="top">
+   <div class="top1">
+   </div>
+   <div class="login_logo">
+      <a href=""><img src="{% static 'image/logo.gif' %}"></a>
+   </div>
+</div>
+{% endblock header_con %}
+{% block body %}
+
+<!--顶部开始-->
+
+<!--顶部结束-->
+<!--中间登录-->
+<div id="login_main">
+   <div class="login_main">
+      <div class="clm_login">
+          <h3>账号登录</h3>
+          <form method="post" name="login" id="login" action="/user/login/">
+              {% csrf_token %}
+             <input type="text" placeholder="手机号/用户名/邮箱" name="username" value="{{ username }}">
+             <input type="password" placeholder="密码" name="password">
+          </form>
+{#          <a  href="#" class="for_pass">忘记密码?</a>#}
+          <button onclick="submitlogin();">登录</button>
+
+          <span class="reg_href">还没有账号？<a href="{% url 'user:register' %}">免费注册</a></span>
+          <div class="cooper">
+             <span>—————     用合作网站账号登录     —————</span>
+             <div class="wxwb_icon">
+                <a href="#"></a>
+                <a href="#"></a>
+             </div>
+          </div>
+      </div>
+   </div>
+</div>
+{{ errmsg }}
+{% endblock body %}

@@ -1,0 +1,779 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-商家店铺</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+<script src="js/Popt.js"></script>
+<script src="js/cityJson.js"></script>
+<script src="js/citySet.js"></script>
+<script src="js/comment.js"></script>
+<script type="text/javascript" src="js/floor.js"></script>
+<script type="text/javascript">
+$(function () {
+   $('.shop_tab ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300; 
+		//给菜单添加选择样式
+	    $(this).addClass('shop_active').siblings().removeClass('shop_active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.shop_tab_con').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script> 
+<script type="text/javascript">
+$(function () {
+   $('.eval_nav ul li').click(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300; 
+		//给菜单添加选择样式
+	    $(this).addClass('eval_active').siblings().removeClass('eval_active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.eval_list_con').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script> 
+<script>
+	$(function () {
+		var obj = new commentMove('.ph1', '.phview1');
+		obj.init()
+	})
+	
+	$(function () {
+		var obj = new commentMove('.ph2', '.phview2');
+		obj.init()
+	})
+</script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+      <div class="top1_con">
+         <div class="top1_con_f">
+            <span>Hi 你吃了吗?</span>
+         </div>
+         <div class="top_lore">
+            <a href="login.html">请登录</a> <a href="register.html">注册</a>
+         </div>
+         <div class="dw_address">
+            请选择地址：<input type="text" id="city"  value=""/>
+         </div>
+		 <script type="text/javascript">
+            $("#city").click(function (e) {
+                SelCity(this,e);
+                console.log("inout",$(this).val(),new Date())
+            });
+            </script>
+      </div>      
+   </div>
+   <div  class="top2">
+      <div class="top2_con">
+         <div class="top2_con_f">
+            <a href="index.html"><img src="image/logo.gif"></a>
+         </div>
+         <div class="sea_form">
+            <form>
+               <input type="text" placeholder="搜索商家或地点"><button>搜索</button>
+            </form>
+         </div>
+         <nav>
+            <a href="index.html">首页</a>
+            <a href="wm_index.html">外卖</a>
+         </nav>
+      </div>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分-->
+<div id="main">
+   <div class="loc_nav"><a href="index.html">首页</a>><a href="wm_shop.html">中国兰州牛肉拉面馆</a></div>
+   <div class="shop_inf">
+      <img src="image/din_2.jpg">
+      <div class="shop_inf_wz">
+         <h2>中国兰州拉面<span>证</span></h2>
+         <b>综合评分：5分</b>
+         <span>接单时间: 06:00-21:00<font>营业中</font></span>
+         <span>商户地址: 经济开发区东方广场城市综合体B地块8栋108室</font></span>
+         <ul>
+             <li><span>21分钟</span><span>平均送达时间</span></li>
+             <li><span>￥15</span><span>起送价</span></li>
+             <li><span>￥3.5</span><span>配送费</span></li>
+         </ul>
+      </div>
+   </div>
+   <div class="shop_tab">
+      <ul>
+         <li class="shop_active">菜单</li>
+         <li>评价</li>
+	  </ul>
+   </div>
+   <div class="shop_tab_con">
+      <div class="shop_bill">
+         <div class="shop_bill_nav">
+            <ul class="fixedmeau">
+               <li class="bill_active">汤面类</li>
+               <li>炒面类</li>
+               <li>炒饭类</li>
+            </ul>   
+         </div>
+         
+        <div class="louceng_box">
+            <div class="louceng">
+               <p>汤面类</p>
+               <ul class="menu_li">
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥17</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥19</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥16</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥20</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面1</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+               </ul>
+            </div>
+            <div class="louceng">
+               <p>炒面类</p>
+               <ul>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面7</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+               </ul>
+            </div>
+            <div class="louceng">
+               <p>炒饭类</p>
+               <ul>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+                  <li>
+                     <div>
+                        <img src="image/sgd_4.jpg">
+                     </div>
+                     <span>牛肉面13</span>
+                     <b>￥18</b>
+				     <div class="bill_btn">  
+                         <button class="minus">  
+                             <strong></strong>  
+                         </button>  
+                         <i>0</i>  
+                          <button class="add">  
+                             <strong></strong>  
+                         </button> 
+                      </div> 
+                  </li>
+               </ul>
+            </div>
+            <div class="shop_car">
+               <div class="shop_car_title">
+                  <span>购物车</span><a href="javascript:void(0)" class="clear_shopcar">清空购物车</a>
+                  <div class="clr"></div>
+               </div>
+               <ul class="shop_car_con">
+                  <p>总计:￥<span id="totalpriceshow">0</span>元</p>
+                  <button class="shop_btn" style="display:none">立即下单</button>
+                  <button class="shop_btn1" >￥20元起送</button>
+                  
+               </ul>
+            </div>
+         </div>
+        <script language="javascript" type="text/javascript">
+        $(function() {
+	//加的效果  
+	$(".add").click(function () {  
+		$(this).prevAll().css("display", "inline-block");  
+		var n = $(this).prev().text();  
+		var num = parseInt(n) + 1;  
+		if (num == 0) { return; }  
+		$(this).prev().text(num);
+		var danjia = ($(this).parent().prev().text()).substring(1);//获取单价
+		var a = $("#totalpriceshow").html();//获取当前所选总价
+		$("#totalpriceshow").html(a * 1 + danjia * 1);//计算当前所选总价
+		jss();
+	});  
+	//减的效果  
+	$(".minus").click(function () {  
+		var n = $(this).next().text();  
+		var num = parseInt(n) - 1;  
+		$(this).next().text(num);//减1  
+		var danjia = ($(this).parent().prev().text()).substring(1);//获取单价
+		var a = $("#totalpriceshow").html();//获取当前所选总价  
+		$("#totalpriceshow").html(a * 1 - danjia * 1);//计算当前所选总价
+		if (num <= 0) {  
+			$(this).next().css("display", "none");  
+			$(this).css("display", "none");  
+			jss();//改变按钮样式  
+			 return  
+		}  
+		if ($("#totalpriceshow").html()<= 0) {  
+			$(this).next().css("display", "none");  
+			$(this).css("display", "none"); 
+            $("#totalpriceshow").html(0)			
+			jss();//改变按钮样式  
+			 return  
+		}  
+		jss();
+	});  
+			})	
+			
+	$(".shop_btn").click(function(){
+		   //window.location.href="wm_plaorder.html";
+			var menu = $(".menu_li").children();//获取所有菜品
+					  if(menu.length > 0){
+						  $.each(menu, function(i,ele){
+							  $(ele).find(".num").html();
+							  alert($(ele).find(".num").html())
+						  });
+					  }
+		   
+		})
+	function jss() {  
+		var m = $("#totalpriceshow").html();  
+		if (m >= 20) {  
+			$(".shop_btn").css("display","inline-block");
+			$(".shop_btn1").css("display","none");
+		} else {  
+			$(".shop_btn").css("display","none");
+			$(".shop_btn1").css("display","inline-block");
+		}  
+	};
+		$(".clear_shopcar").click(function () {
+			$(".bill_btn .minus").css("display","none");
+			$(".bill_btn i").text(0);
+			$(".bill_btn i").css("display","none");
+			$(".shop_btn").css("display","none");
+			$(".shop_btn1").css("display","inline-block");
+		    $("#totalpriceshow").html(0);
+			});
+        </script>
+	    <script type="text/javascript" language="javascript">
+            /*
+             totop  //返回顶部按钮
+             fixedevery   // 左侧固定导航的每一项
+             louceng  //模块的每一项
+             header   //头部
+             */
+            $(function(){
+                var obj = new floor('.totop','.fixedmeau>li','.louceng_box>.louceng','.header_box');
+                obj.init()
+            })
+        </script>
+      </div>
+       <div class="shop_eval">
+          <div class="Praise_degree">
+             <p><span>好评度</span><span>95%</span></p>
+             <ul>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+             <li>好吃</li>
+          </ul>
+             <div class="clr"></div>
+          </div>
+          <div class="eval_nav">
+             <ul>
+                <li class="eval_active">好评</li>
+                <li>中评</li>
+                <li>差评</li>
+             </ul>
+          </div>
+          <div class="eval_list_con">
+             <div class="eval_one">
+                <ul>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                        <div class="tm-m-photos ph1">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview1 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                        <div class="tm-m-photos ph2">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview2 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                </ul>
+             </div>
+             <div class="eval_two">
+                <ul>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评中评。
+                      </p>
+                        <div class="tm-m-photos ph1">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview1 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                        <div class="tm-m-photos ph2">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview2 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                </ul>
+             </div>
+             <div class="eval_three">
+                <ul>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评差评。
+                      </p>
+                        <div class="tm-m-photos ph1">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview1 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                        <div class="tm-m-photos ph2">
+                          <ul class="tm-m-photos-thumb">
+                            <li data-src="image/a1.png"> <img src="image/a1.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a2.png"> <img src="image/a2.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a3.png"> <img src="image/a3.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a4.png"> <img src="image/a4.png"> <b class="tm-photos-arrow"></b> </li>
+                            <li data-src="image/a5.png"> <img src="image/a5.png"> <b class="tm-photos-arrow"></b> </li>
+                          </ul>
+                          <div class="tm-m-photo-viewer phview2 transition1"> 
+                              <img src="image/a1.png"> 
+                          </div>
+                        </div>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                   <li>
+                      <span>
+                         我是用户名
+                         <img src="image/cf.jpg">
+                      </span>
+                      <b>兰州炒饭</b><font>2019.1.6</font>
+                      <p>很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃很好吃。
+                      </p>
+                   </li>
+                </ul>
+             </div>
+          </div>
+          <div class="wm_main_fenye">
+         <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+          </div>
+       </div>
+  </div>
+</div>
+<!--中间部分-->
+<footer>
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</body>
+</html>

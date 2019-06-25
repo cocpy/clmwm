@@ -1,0 +1,61 @@
+{% extends 'sj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-菜品管理-菜品修改{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+   $('.sj_order_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300;
+		//给菜单添加选择样式
+	    $(this).addClass('active').siblings().removeClass('active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.sj_order_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+</script>
+{% endblock topfiles %}
+{% block body %}
+
+   <div class="add_cp">
+      <h3>菜品修改</h3>
+       <form method="post" action="/goodsmanage/sj_cpgl_update/{{ sku.id }}/">
+           {% csrf_token %}
+          <ul>
+             <li><span>商品名称<input type="text" id="name" name="name" value="{{ sku.name }}"></span><span>商品价格<input type="text" id="price" name="price" value="{{ sku.price }}"></span></li>
+             <li><span>餐盒价格<input type="text" id="pack" name="pack" value="{{ sku.pack }}"></span><span>商品库存<input type="text" id="stock" name="stock" value="{{ sku.stock }}"></span></li>
+             <li><span>商品类型<input type="text" id="type" name="type" value="{{ sku.type }}"></span></li>
+             <li><span>商品图片</span>
+                <div class="img_yulan">
+                   <img id="preview" src="{{ sku.image }}"/>
+                </div>
+                <script type="text/javascript">
+                  function imgPreview(fileDom){
+                      //判断是否支持FileReader
+                      if (window.FileReader) {
+                          var reader = new FileReader();//创建filereader对象
+                      } else {
+                          alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+                      }
+                      //获取文件
+                      var file = fileDom.files[0];
+                      //读取完成
+                      reader.onload = function(e) {
+                          //获取图片dom
+                          var img = document.getElementById("preview");
+                          //图片路径设置为读取的图片
+                          img.src = e.target.result;
+                      };
+                      reader.readAsDataURL(file);
+                  }
+              </script>
+                <input type="file" name="file" onchange="imgPreview(this)">
+             </li>
+          </ul>
+          <button style="background:#F90" type="submit">点击修改</button>
+       </form>
+   </div>
+
+{% endblock body %}

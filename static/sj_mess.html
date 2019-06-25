@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-留言管理</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(function () {
+   $('.liuyan_man ul li').hover(function(){
+        //获得当前被点击的元素索引值
+         var Index = $(this).index();
+		 var line=300*Index-300; 
+		//给菜单添加选择样式
+	    $(this).addClass('ly_active').siblings().removeClass('ly_active');
+		 $(".line").stop(true,true).animate({left:line},200);
+		$('.liuyan_man').children('div').eq(Index).show().siblings('div').hide();
+   });
+});
+
+</script> 
+<!--顶部开始-->
+<div id="sj_top">
+   <div class="sj_index_top">
+            <a href="index.html"><img src="image/logo.gif"></a>
+            <select>
+               <option value ="营业中">营业中</option>
+               <option value ="休息中">休息中</option>
+            </select>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分-->
+<div id="main">
+    <nav class="sj_nav">
+       <ul>
+          <li><a href="sj_order.html">订单管理</a></li>          
+          <li><a href="sj_cpgl.html">菜品管理</a></li>          
+          <li><a href="sj_mess.html">留言板管理</a></li>          
+       </ul>
+       <span>注册时间:2019.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合评分：<b>95分</b></span>
+    </nav>
+    <div class="liuyan_title">
+       <h3>留言板</h3>
+       <span>好评度:<b>95%</b></span>
+    </div>
+    <div class="liuyan_man">
+        <ul class="ly_tab">
+             <li class="ly_active">好评</li><li>中评</li><li>差评</li>
+        </ul>
+       <div class="ly_con1">
+         <table>
+              <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃</td>
+             </tr> 
+         </table>
+         <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div>
+       <div class="ly_con2">
+         <table>
+              <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>中评中评中评中评中评中评中评中评中评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>中评中评中评中评中评中评中评中评中评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>中评中评中评中评中评中评中评中评中评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>中评中评中评中评中评中评中评中评中评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>中评中评中评中评中评中评中评中评中评</td>
+             </tr> 
+         </table>
+                  <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+
+       </div>
+       <div class="ly_con3">
+         <table>
+              <tr><td width="7%">头像</td><td width="16%">用户名</td><td width="11%">下单时间</td><td width="9%">餐品</td><td width="24%">晒图</td><td width="33%">评价</td></tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>差评差评差评差评差评差评差评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>差评差评差评差评差评差评差评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>差评差评差评差评差评差评差评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>差评差评差评差评差评差评差评</td>
+             </tr> 
+             <tr><td class="user_tx">
+                <img src="image/cf.jpg">
+             </td><td>用户名</td><td>2019.1.14 10:04</td><td>炒饭</td>
+             <td class="user_st">
+               <img src="image/cf.jpg"><img src="image/cf.jpg"><img src="image/cf.jpg"> 
+             </td><td>差评差评差评差评差评差评差评</td>
+             </tr> 
+         </table>
+         <div class="cp_fenye">
+          <span>当前显示：</span><a href="#">20</a><a href="#">30</a><a href="#">200</a><span>条信息</span>
+          <button><</button><font>1/1</font><button>></button>
+          <input type="text">
+          <button>GO</button>
+         </div>
+       </div>
+       
+    </div>
+</div>
+<!--中间部分-->
+<!--底部-->
+<footer id="sj_footer1">
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+<!--底部-->
+</body>
+</html>

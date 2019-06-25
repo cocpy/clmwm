@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+{% load staticfiles %}
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    {# 网页标题内容块 #}
+	<title>{% block title %}{% endblock title %}</title>
+	<link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+	{# 网页顶部引入文件块 #}
+    {% block topfiles %}{% endblock topfiles %}
+</head>
+<body>
+{# 网页顶部欢迎信息块 #}
+{% block header_con %}
+    <div id="top">
+        <div class="top1">
+          <div class="top1_con">
+             <div class="top1_con_f">
+                <span>Hi，
+                    {% if user.is_authenticated %}
+                        <span>{{ user.real_name }}
+                        </span>
+                    {% endif %}
+                </span>
+                 <span></span>
+             </div>
+             <div class="top_lore">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user:logout' %}">退出</a>
+                    <a href="{% url 'order:query' '1'%}" style="color:#0da2f8;letter-spacing:1px;">订单查询</a>
+                {% else %}
+				    <a href="{% url 'user:login' %}">请登录</a> <a href="{% url 'user:register' %}">注册</a>
+                {% endif %}
+
+             </div>
+             <div class="dw_address" style="display: none">
+                请选择地址：<input type="text" id="city"  value=""/>
+             </div>
+             <script type="text/javascript">
+                $("#city").click(function (e) {
+                    SelCity(this,e);
+                    console.log("inout",$(this).val(),new Date())
+                });
+                </script>
+          </div>
+       </div>
+       <div  class="top2">
+          <div class="top2_con">
+             <div class="top2_con_f">
+                <a href="{% url 'goods:index' %}"><img src="{% static 'image/logo.gif' %}"></a>
+             </div>
+             <div class="sea_form">
+                <form id="searchForm" action="{% url 'goods:haystack' %}" method="get">
+                   <input id="q" name="q" type="text" placeholder="搜索商家"><button type="submit">搜索</button>
+                </form>
+             </div>
+             <nav>
+                <a href="{% url 'goods:index' %}">首页</a>
+                <a href="{% url 'goods:wm_index' '4' '1' %}">外卖</a>
+             </nav>
+          </div>
+       </div>
+    </div>
+{% endblock header_con %}
+
+{# 网站主体内容块 #}
+{% block body %}{% endblock body %}
+
+</body>
+<footer>
+   <div class="foot_nav">
+      <a href="{% url 'goods:index' %}">首页</a>|<a href="{% url 'goods:wm_index' '4' '1' %}">外卖</a>|<a href="{% url 'goods:wm_index' '0' '1'%}">中餐</a>|<a href="{% url 'goods:wm_index' '1' '1'%}">西餐</a>|<a href="{% url 'goods:wm_index' '2' '1'%}">水果</a>|<a href="{% url 'goods:wm_index' '3' '1'%}">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</html>

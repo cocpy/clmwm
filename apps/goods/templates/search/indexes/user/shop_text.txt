@@ -1,0 +1,2 @@
+# templates/search/indexes/search/shop_text.txt
+{{ object.shop_name }}

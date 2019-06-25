@@ -1,0 +1,86 @@
+<!doctype html>
+{% extends 'mj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-订单跟踪{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/Popt.js' %}"></script>
+<script src="{% static 'js/cityJson.js' %}"></script>
+<script src="{% static 'js/citySet.js' %}"></script>
+{% endblock topfiles %}
+{% block body %}
+
+<div id="main">
+   <div class="order_tra">
+      <div class="order_t_title">
+         <span>预计送达时间:{{ arrive_time }} </span>
+      </div>
+      <div class="order_t_con">
+         <ul>
+
+            {% if order.order_status > 1 %}
+              <li>
+                <div class="count_turn">
+                  <b>1</b><span>已成功支付</span><font></font><span>{{ order_track.0.create_time }}</span>
+                  <div>商家待接单</div>
+               </div>
+              </li>
+            {% endif %}
+
+            {% if order.order_status > 2 %}
+              <li>
+                <div class="count_turn">
+                  <b>2</b><span>商家已接单</span><font></font><span>{{ order_track.1.create_time }}</span>
+                  <div>等待骑手接单</div>
+               </div>
+              </li>
+             {% elif order.order_status == 0  %}
+              <li>
+                <div class="count_turn">
+                  <b>1</b><span>商家拒绝接单</span><font></font><span>{{ order_track.1.create_time }}</span>
+                  <div>支付金额两小时内退回原账户</div>
+               </div>
+              </li>
+            {% endif %}
+
+            {% if order.order_status > 3 %}
+               <li>
+                <div class="count_turn">
+                  <b>3</b><span>骑手已接单</span><font></font><span>{{ order_track.2.create_time }}</span>
+                  <div>前往取货中</div>
+               </div>
+               </li>
+            {% endif %}
+
+            {% if order.order_status > 4 %}
+                <li>
+                <div class="count_turn">
+                  <b>4</b><span>骑手已取货</span><font></font><span>{{ order_track.3.create_time }}</span>
+                  <div>订单配送中</div>
+               </div>
+               </li>
+            {% endif %}
+
+            {% if order.order_status > 5 %}
+                <li>
+                <div class="count_turn">
+                  <b>5</b><span>订单已送达</span><font></font><span>{{ order_track.4.create_time }}</span>
+                  <div>请前往评价</div>
+               </div>
+               </li>
+                <a href="{% url 'order:go_comment' order.order_id %}" style="float: left;color: #fff9e5ff;background: #00d36e;width: 15%;height: 50px;font-size: large">
+                    <p style="margin-left: 40px;margin-top: 12px">去评价</p>
+                </a>
+
+            {% endif %}
+
+         </ul>
+         <div class="wm_order_btn">
+            <button onclick="history.go(0)">刷新订单</button>   
+            <button style="display: none">催单</button>
+            <button style="display: none">取消订单</button>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock body %}

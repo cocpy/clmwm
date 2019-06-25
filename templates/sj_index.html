@@ -1,0 +1,60 @@
+{% extends 'sj.html' %}
+{% load staticfiles %}
+{% block title %}吃了么-商家首页{% endblock title %}
+{% block topfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock topfiles %}
+{% block body %}
+
+    <div class="sj_name">
+       <h2><span>店铺名称：</span>{{ shop.shop_name }}</h2>
+    </div>
+    <div class="sj_count">
+       <div class="co_day">
+          <div class="co_day_title">
+             <span>销量统计 - </span>
+             <span class="circle_bj">日</span>
+             <font>销售额:{{ today.total_price }}元</font>
+          </div>
+          <div class="co_day_con">
+             <table>
+                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                {% for item_today in today.sku_info %}
+                <tr><td>{{ forloop.counter }}</td><td>{{ item_today.name }}</td></tr>
+                {% endfor %}
+             </table>
+          </div>
+       </div> 
+       
+       <div class="co_week">
+          <div class="co_week_title">
+             <span>销量统计 - </span>
+             <span class="circle_bj">周</span>
+             <font>销售额:{{ week.total_price }}元</font>
+          </div>
+          <div class="co_week_con">
+             <table>
+                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                {% for item_week in week.sku_info %}
+                <tr><td>{{ forloop.counter }}</td><td>{{ item_week.name }}</td></tr>
+                {% endfor %}
+             </table>
+          </div>
+       </div>     
+       <div class="co_month">
+          <div class="co_month_title">
+             <span>销量统计 - </span>
+             <span class="circle_bj">月</span>
+             <font>销售额:{{ month.total_price }}元</font>
+          </div>
+          <div class="co_month_con">
+             <table>
+                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                {% for item_month in month.sku_info %}
+                <tr><td>{{ forloop.counter }}</td><td>{{ item_month.name }}</td></tr>
+                {% endfor %}
+             </table>
+          </div>
+       </div>     
+    </div>
+{% endblock body %}

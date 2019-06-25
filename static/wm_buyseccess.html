@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>吃了么-购买成功</title>
+<link href="css/inc.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.min.js"></script>
+<script src="js/webuploader.min.js"></script>
+<script src="js/diyUpload.js"></script>
+<script src="js/Popt.js"></script>
+<script src="js/cityJson.js"></script>
+<script src="js/citySet.js"></script>
+</head>
+<body>
+<!--顶部开始-->
+<div id="top">
+   <div class="top1">
+      <div class="top1_con">
+         <div class="top1_con_f">
+            <span>Hi 你吃了吗?</span>
+         </div>
+         <div class="top_lore">
+            <a href="login.html">请登录</a> <a href="register.html">注册</a>
+         </div>
+         <div class="dw_address">
+            请选择地址：<input type="text" id="city"  value=""/>
+         </div>
+		 <script type="text/javascript">
+            $("#city").click(function (e) {
+                SelCity(this,e);
+                console.log("inout",$(this).val(),new Date())
+            });
+            </script>
+      </div>      
+   </div>
+   <div  class="top2">
+      <div class="top2_con">
+         <div class="top2_con_f">
+            <a href="index.html"><img src="image/logo.gif"></a>
+         </div>
+         <div class="buy_step3">
+            <ul>
+               <li>1.提交订单</li><li>2.选择支付方式</li><li>3.购买成功</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+<!--顶部结束-->
+<!--中间部分开始-->
+<div id="main">
+   <div class="order_mx">
+      <p>订单明细<span>本次订单送达时间:50分钟</span></p>
+      <div class="order_mx1">
+         <ul>
+            <li><span>牛肉面</span><span>￥18*2</span></li>
+            <li><span>炒饭</span><span>￥18*2</span></li>
+            <li><span>牛肉面</span><span>￥18*2</span></li>
+            <li><span>炒饭</span><span>￥18*2</span></li>
+            <li><span>牛肉面</span><span>￥18*2</span></li>
+            <li><span>炒饭</span><span>￥18*2</span></li>
+            <li><span>牛肉面</span><span>￥18*2</span></li>
+         </ul>
+      </div>
+      <div class="order_mx2">
+         <ul>
+            <li><span>餐盒费</span><span>￥1.5*8</span></li>
+            <li><span>配送费</span><span>￥18*2</span></li>
+         </ul>
+         <div class="order_total">
+            <b>合计</b>
+            <b>￥135</b>
+         </div>
+      </div>
+      <div class="order_mx3">
+         <ul>
+            <li>
+                商家已接单
+                <span></span>
+            </li>
+            <li>
+                骑手取货中
+                <span></span>
+            </li>
+            <li>
+                订单配送中
+                <span></span>
+            </li>
+            <li>
+                订单已送达 
+            </li>
+         </ul>
+      </div>
+      <div class="order_mx4">
+         <ul>
+            <li>2018年10月15日  16:35</li>
+            <li>2018年10月15日  16:35</li>
+            <li>2018年10月15日  16:35</li>
+            <li>2018年10月15日  16:35</li>
+         </ul>
+      </div>
+      <div class="clr"></div>
+   </div>
+   <div class="order_eval">
+      <div class="sc_eval">
+         <div class="sc_eval_title">送餐评价</div>
+         <div class="sc_eval_con">
+                     <form>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval1" class="sc_eval_input">
+               <label for="sc_eval1">礼貌热情</label>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval2" class="sc_eval_input">
+               <label for="sc_eval2">快速准时</label>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval3" class="sc_eval_input">
+               <label for="sc_eval3">仪表整洁</label>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval4" class="sc_eval_input">
+               <label for="sc_eval4">风雨无阻</label>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval5" class="sc_eval_input">
+               <label for="sc_eval5">风雨无阻</label>
+               <input type="checkbox" value="" name="sc_eval" id="sc_eval6"  class="sc_eval_input">
+               <label for="sc_eval6">礼貌热情</label>
+                <textarea placeholder="亲，菜品口味如何，服务是否周到？" class="inp_count" maxlength="400"></textarea>    
+                <span class="wordsNum">0/150</span>
+            </form>
+            <!--监听数字个数-->
+               <script language="javascript" type="text/javascript">
+					var checkStrLengths = function (str, maxLength) {
+						var maxLength = maxLength;
+						var result = 0;
+						if (str && str.length > maxLength) {
+							result = maxLength;
+						} else {
+							result = str.length;
+						}
+						return result;
+					}
+					$(".inp_count").on('input propertychange', function () {
+						//获取输入内容
+						var userDesc = $(this).val();
+						//判断字数
+						var len;
+						if (userDesc) {
+							len = checkStrLengths(userDesc, 350);
+						} else {
+							len = 0;
+						}
+						//显示字数
+						$(".wordsNum").html(len + '/350');});
+				</script>
+            <!--监听数字个数-->
+         </div>
+      </div>
+      <div class="yc_eval">
+         <div class="yc_eval_title">送餐评价</div>
+         <div class="yc_eval_con">
+            <div class="order-list-Below">
+            <span>口味</span>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+         </div>
+            <div class="order-list-Below">
+            <span>包装</span>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+         </div>
+            <script type="text/javascript">
+$(".order-list-Below ul li").click(
+    function(){
+        var num = $(this).index()+1;
+        var len = $(this).index();
+        var thats = $(this).parent(".order-list-Below ul").find("li");
+        if($(thats).eq(len).attr("class")=="on"){
+            if($(thats).eq(num).attr("class")=="on"){
+                $(thats).removeClass();
+                for (var i=0 ; i<num; i++) {
+                    $(thats).eq(i).addClass("on");
+                }
+            }else{
+                $(thats).removeClass();
+                for (var k=0 ; k<len; k++) {
+                    $(thats).eq(k).addClass("on");
+                }
+            }
+        }else{
+            $(thats).removeClass();
+            for (var j=0 ; j<num; j++) {
+                $(thats).eq(j).addClass("on");
+            }
+        }
+    }
+);
+</script>
+         </div>
+         <div class="shai_pic">
+             <ul class="upload-ul clearfix">
+                <li class="upload-pick">
+                    <div class="webuploader-container clearfix" id="goodsUpload"></div>
+                </li>
+            </ul>
+            <script src="js/webuploader.min.js"></script>
+            <script src="js/diyUpload.js"></script>
+            <script>
+            $(function(){
+            
+                //上传图片
+                var $tgaUpload = $('#goodsUpload').diyUpload({
+                    url:'/uploadFilePath',
+                    success:function( data ) { },
+                    error:function( err ) { },
+                    buttonText : '',
+                    accept: {
+                        title: "Images",
+                        extensions: 'gif,jpg,jpeg,bmp,png'
+                    },
+                    thumb:{
+                        width:120,
+                        height:90,
+                        quality:100,
+                        allowMagnify:true,
+                        crop:true,
+                        type:"image/jpeg"
+                    }
+                });
+            });
+            </script>
+        </div>
+      </div>
+      <div class="clr"></div>
+   <button class="sub_eval">提交评价</button>
+   </div>
+</div>
+<!--中间部分结束-->
+<!--底部开始-->
+<footer>
+   <div class="foot_nav">
+      <a href="index.html">首页</a>|<a href="wm_index.html">外卖</a>|<a href="wm_index.html">中餐</a>|<a href="wm_index.html">西餐</a>|<a href="wm_index.html">水果</a>|<a href="wm_index.html">饮品</a>
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+<!--底部结束-->
+</body>
+</html>
