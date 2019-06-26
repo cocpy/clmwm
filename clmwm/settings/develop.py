@@ -17,7 +17,7 @@ DATABASES = {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'clmww',
          'USER': 'root',
-         'PASSWORD': 'root',
+         'PASSWORD': 'yourpassword',
          'HOST': '127.0.0.1',
          'PORT': 3306,
      }
@@ -63,7 +63,7 @@ DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 # 设置fdfs使用的client.conf文件路径
 FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
 # 设置fdfs存储服务器上nginx的IP和端口号
-FDFS_URL = 'http://192.168.85.134:80/'
+FDFS_URL = 'http://134.175.106.182:80/'
 
 # 配置HayStack
 HAYSTACK_CONNECTIONS = {
