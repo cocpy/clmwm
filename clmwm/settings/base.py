@@ -114,7 +114,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 配置登录url地址
 LOGIN_URL = '/user/login'
