@@ -104,8 +104,12 @@ def statistics(day_start, df_shop, n):
     # print(keys)
     sku_info = GoodsSKU.objects.filter(id__in=keys)
 
+    # 为每个sku添加销量数据
+    for sku in sku_info:
+        sku.count = id_count[sku.id]
+
     # 构造数据返回
-    context = {'sku_info': sku_info, 'total_price': total_price}
+    context = {'sku_info': sku_info, 'total_price': total_price, 'id_count': id_count}
 
     return context
 

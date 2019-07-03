@@ -8,6 +8,15 @@
 <link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
 <script src="{% static 'js/jquery.min.js' %}"></script>
+<script language="javascript" type="text/javascript">
+    function check() {
+        var pwd = $('#pwd').val();
+        var cpwd = $('#cpwd').val();
+        if (pwd!=cpwd){
+            alert('两次密码不一致');
+        }
+    }
+</script>
 </head>
 <body>
 <!--顶部开始-->
@@ -15,8 +24,8 @@
    <div class="top1">
    </div>
    <div class="login_logo">
-      <a href="index.html"><img src="{% static 'image/logo.gif' %}"></a>
-      <span class="reg_href">已有吃了么账号？<a href="login.html">登录</a></span>
+      <a href="{% url 'goods:index' %}"><img src="{% static 'image/logo.gif' %}"></a>
+      <span class="reg_href">已有吃了么账号？<a href="{% url 'user:login' %}">登录</a></span>
    </div>
 </div>
 <!--顶部结束-->
@@ -28,7 +37,7 @@
       <ul>
          <li><span>账号</span><input type="text" name="user_name" id="user_name"></li>
          <li><span>创建密码</span><input type="password" name="pwd" id="pwd"></li>
-         <li><span>确认密码</span><input type="password" name="cpwd" id="cpwd"></li>
+         <li><span>确认密码</span><input type="password" name="cpwd" id="cpwd" onchange="check()"></li>
          <li><span>真实姓名</span><input type="text" name="receiver" id="receiver"></li>
          <li><span>联系电话</span><input type="text" name="phone" id="phone"></li>
          <li><span>地址</span><input type="text" name="addr" id="addr"></li>

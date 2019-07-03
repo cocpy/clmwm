@@ -17,10 +17,15 @@ window.onload = function(){
     var second = parseInt((endTime - nowTime.getTime()) / 1000);
     var m = parseInt(second / 60 );
     var s = parseInt(second % 60); // 当前的秒
-    console.log(s);
+    {#console.log(s);#}
     m<10 ? m="0"+m : m;
     s<10 ? s="0"+s : s;
-    document.getElementById("time_down").innerHTML = "<img src=\"{% static 'image/warn.png' %}\">请在<b>"+m+":"+s+"</b>内完成支付，超时订单会自动取消";
+    if (m>0 && s>0){
+        document.getElementById("time_down").innerHTML = "<img src=\"{% static 'image/warn.png' %}\">请在<b>"+m+":"+s+"</b>内完成支付，超时订单会自动取消";
+    }else{
+        document.getElementById("time_down").innerHTML = "<img src=\"{% static 'image/warn.png' %}\"><b>订单已超时，请重新下单！</b>";
+    }
+
    }
 }
 
@@ -65,7 +70,7 @@ function order_check() {
              <a href="{% url 'goods:index' %}">回到首页</a>
              <a href="/goods/{{ shop.id }}/1/1/1">重新下单</a>
              <button id="go_pay" name="go_pay" order_id="{{ order.order_id }}" status="{{ order.order_status }}">去付款</button>
-{#             <button id="order_check" name="order_check" onclick="order_check();" order_id="{{ order.order_id }}">已支付</button>#}
+             <button id="order_check" name="order_check" style="display: none" onclick="order_check();" order_id="{{ order.order_id }}">已支付</button>
             <script language="javascript" type="text/javascript">
                 $("#go_pay").click(function () {
                     // 获取status
@@ -82,13 +87,14 @@ function order_check() {
                             if (data.res == 3){
                                 // 引导用户到支付页面
                                 window.open(data.pay_url)
+                                document.getElementById('order_check').style.display=""
                                 // 浏览器访问/order/check, 获取支付交易的结果
                                 // ajax post 传递参数:order_id
                                 $.post('/order/check/', params, function (data){
                                     if (data.res == 3){
                                         alert('支付成功')
                                         // 重定向页面
-                                        window.location.href="http://127.0.0.1:8000/order/success/" + order_id;
+                                        window.location.href="http://localhost:8000/order/success/" + order_id;
                                     }
                                     else{
                                         alert(data.errmsg)

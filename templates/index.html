@@ -20,7 +20,7 @@
      <div class="banner">
      </div>
 </div>
-<input id="input-id" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" >
+{#<input id="input-id" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" >#}
 <div id="dinner">
    <div class="dinner_title">
       <h2>中餐</h2><a href="{% url 'goods:wm_index' '0' '1'%}">查看全部></a>
@@ -46,7 +46,7 @@
                       <span>{{ item.shop_score }}</span>
                   </div>
                   <div class="food_sc">
-                     <span>起送:{{ item.shop_price }}</span><span>配送费:{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
+                     <span>起送:￥{{ item.shop_price }}</span><span>配送费:￥{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
                   </div>
                </div>
             </a>
@@ -80,7 +80,7 @@
                       <span>{{ item.shop_score }}</span>
                   </div>
                   <div class="food_sc">
-                     <span>起送:{{ item.shop_price }}</span><span>配送费:{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
+                     <span>起送:￥{{ item.shop_price }}</span><span>配送费:￥{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
                   </div>
                </div>
             </a>
@@ -114,7 +114,7 @@
                           <span>{{ item.shop_score }}</span>
                       </div>
                       <div class="food_sc">
-                         <span>起送:{{ item.shop_price }}</span><span>配送费:{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
+                         <span>起送:￥{{ item.shop_price }}</span><span>配送费:￥{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
                       </div>
                   </div>
                </a>
@@ -148,7 +148,7 @@
                           <span>{{ item.shop_score }}</span>
                       </div>
                       <div class="food_sc">
-                         <span>起送:{{ item.shop_price }}</span><span>配送费:{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
+                         <span>起送:￥{{ item.shop_price }}</span><span>配送费:￥{{ item.send_price }}</span><span>时间:{{ item.duration }}分钟</span>
                       </div>
                   </div> 
                </a>

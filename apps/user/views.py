@@ -184,7 +184,7 @@ class ShopRegisterView(View):
             # 数据不完整
             return render(request, 'sj_register.html', {'errmsg': '缺少相关数据'})
 
-        # rec = FastDFSStorage().save(img.name, img)
+        rec = FastDFSStorage().save(img.name, img)
 
         # 校验店铺名称是否重复
         try:
@@ -198,8 +198,8 @@ class ShopRegisterView(View):
                        shop_price=shop_price, receive_start=receive_start, receive_end=receive_end, high_opinion='0')
         df_shop.save()
 
-        # shop_image = ShopImage(image=rec, shop_id=df_shop.id)
-        # shop_image.save()
+        shop_image = ShopImage(image=rec, shop_id=df_shop.id)
+        shop_image.save()
 
         return redirect(reverse('user:login'))
 
@@ -266,7 +266,8 @@ class LoginView(View):
                 return render(request, 'login.html', {'errmsg': '账户未激活'})
         else:
             # 用户名或密码错误
-            return render(request, 'login.html', {'errmsg': '用户名或密码错误'})
+            messages.error(request, "用户名或密码错误")
+            return render(request, 'login.html', locals(), RequestContext(request))
 
 
 class LogoutView(View):

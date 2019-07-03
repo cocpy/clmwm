@@ -7,25 +7,19 @@
 <link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
 <script src="{% static 'js/jquery.min.js' %}"></script>
-{#<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>#}
 <script language="JavaScript">
     function turnType() {
         var dnsname = $('#bus_style').val()
         var type_detail
         if (dnsname == '0'){
           type_detail = 'C'
-
         }else if(dnsname == '1'){
           type_detail = 'W'
-
         }else{
-
         }
-
         getTypeDetail(type_detail)
     }
     function getTypeDetail(type_detail) {
-
       $.ajax({
          url: '/user/type_detail',
          data:{'type_detail':type_detail},
@@ -58,8 +52,8 @@
        {% csrf_token %}
       <ul>
          <li><span>店铺名称</span><input type="text" id="shop_name" name="shop_name"></li>
-         <li><span>主营类型</span>{# <input name="bus_style" id="bus_style" type="radio" value="0"  checked/><span>中餐</span><input name="bus_style" type="radio" value="1"/><span>西餐</span><input name="bus_style" type="radio" value="2"/><span>水果</span><input name="bus_style" type="radio" value="3"/><span>饮品</span></li>#}
-            <select name="bus_style" id="bus_style" onchange="turnType();">
+         <li><span>主营类型</span>
+            <select name="bus_style" id="bus_style" onchange="turnType();" style="width: auto">
                     <option></option>
                     <option value="0">中餐</option>
                     <option value="1">西餐</option>
@@ -77,7 +71,7 @@
              <span><input type="time" id="receive_end" name="receive_end"></span>
          </li>
          <li><span>店铺地址</span><textarea placeholder="请填写详细地址" name="shop_addr" id="shop_addr"></textarea></li>
-         <li><span>起送价格</span><input type="text" id="shop_price" name="shop_price"></li>
+         <li><span>起送价格</span><input type="text" id="shop_price" name="shop_price">￥</li>
 
          <li><span>店铺头像</span>
                  <div class="img_yulan">

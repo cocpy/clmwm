@@ -18,7 +18,7 @@ DATABASES = {
          'NAME': 'clmww',
          'USER': 'root',
          'PASSWORD': 'yourpassword',
-         'HOST': '127.0.0.1',
+         'HOST': '134.175.106.182',
          'PORT': 3306,
      }
 }

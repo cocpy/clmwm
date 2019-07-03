@@ -123,7 +123,7 @@
               <li><a href="{% url 'commentmanage:mess' '1' '1' '1' %}">留言板管理</a></li>
            </ul>
 
-           <span>注册时间:{{ shop.create_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合评分：<b>{{ shop.shop_score }}</b></span>
+           <span>注册时间:{{ shop.create_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合评分：<b>{{ shop.shop_score }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'user:logout' %}">退出登录</a></span>
         </nav>
 {% endblock main %}
 {# 网站主体内容块 #}
@@ -139,7 +139,7 @@
    </div>
    <div class="copy_ri">
          <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
-         <img src=""></div>
+         <img src="{% static 'image/mrkj.jpg' %}"></div>
    </div>
 </footer>
 </html>

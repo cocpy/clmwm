@@ -103,8 +103,9 @@ $(function () {
                  <td width="15%">地址</td>
                  <td width="10%">餐品</td>
                  <td width="6%">金额+运费</td>
-                 <td width="22%">备注</td>
-                 <td width="22%">订单状态</td>
+                 <td width="20%">备注</td>
+                 <td width="17%">评价</td>
+                 <td width="7%">订单状态</td>
              </tr>
              {% for finish in order_finish.info %}
              <tr>
@@ -121,6 +122,7 @@ $(function () {
                  </td>
                  <td>{{ finish.total_price }}+{{ finish.transit_price }}</td>
                  <td>{{ finish.remarks }}</td>
+                 <td>{{ finish.comment }}</td>
                  <td>
                     <a>订单已完成</a>
                  </td>

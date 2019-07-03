@@ -33,7 +33,6 @@
                 {% else %}
 				    <a href="{% url 'user:login' %}">请登录</a> <a href="{% url 'user:register' %}">注册</a>
                 {% endif %}
-
              </div>
              <div class="dw_address" style="display: none">
                 请选择地址：<input type="text" id="city"  value=""/>
@@ -64,10 +63,12 @@
        </div>
     </div>
 {% endblock header_con %}
-
+<a name="top"> </a>
 {# 网站主体内容块 #}
 {% block body %}{% endblock body %}
-
+<div style="overflow: hidden;position: fixed;right: 10px;bottom: 20px;z-index: 10;">
+    <a href="#top"><img src="{% static 'image/top.png' %}"></a>
+</div>
 </body>
 <footer>
    <div class="foot_nav">
@@ -75,7 +76,7 @@
    </div>
    <div class="copy_ri">
          <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
-         <img src=""></div>
+         <img src="{% static 'image/mrkj.jpg' %}"></div>
    </div>
 </footer>
 </html>

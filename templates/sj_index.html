@@ -18,9 +18,12 @@
           </div>
           <div class="co_day_con">
              <table>
-                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                <tr><td style="color:#333">排名</td><td>菜品</td><td>数量</td></tr>
                 {% for item_today in today.sku_info %}
-                <tr><td>{{ forloop.counter }}</td><td>{{ item_today.name }}</td></tr>
+                <tr><td>{{ forloop.counter }}</td>
+                    <td>{{ item_today.name }}</td>
+                    <td>{{ item_today.count }}</td>
+                </tr>
                 {% endfor %}
              </table>
           </div>
@@ -34,9 +37,9 @@
           </div>
           <div class="co_week_con">
              <table>
-                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                <tr><td style="color:#333">排名</td><td>菜品</td><td>数量</td></tr>
                 {% for item_week in week.sku_info %}
-                <tr><td>{{ forloop.counter }}</td><td>{{ item_week.name }}</td></tr>
+                <tr><td>{{ forloop.counter }}</td><td>{{ item_week.name }}</td><td>{{ item_week.count }}</td></tr>
                 {% endfor %}
              </table>
           </div>
@@ -49,9 +52,9 @@
           </div>
           <div class="co_month_con">
              <table>
-                <tr><td style="color:#333">排名</td><td>菜品</td></tr>
+                <tr><td style="color:#333">排名</td><td>菜品</td><td>数量</td></tr>
                 {% for item_month in month.sku_info %}
-                <tr><td>{{ forloop.counter }}</td><td>{{ item_month.name }}</td></tr>
+                <tr><td>{{ forloop.counter }}</td><td>{{ item_month.name }}</td><td>{{ item_month.count }}</td></tr>
                 {% endfor %}
              </table>
           </div>

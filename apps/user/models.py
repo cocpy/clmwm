@@ -59,8 +59,8 @@ class Shop(BaseModel):
     business_do = models.BooleanField(default=True, verbose_name='是否营业')
     high_opinion = models.CharField(max_length=20, verbose_name='好评度')
 
-    def __str__(self):
-        return self.shop_name
+    # def __str__(self):
+    #     return self.shop_name
 
     class Meta:
         db_table = 'df_shop'

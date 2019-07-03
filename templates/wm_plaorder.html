@@ -2,8 +2,9 @@
 {% load staticfiles %}
 {% block title %}立即下单{% endblock title %}
 {% block topfiles %}
-<style type="text/css">.window{
-    width:920px;
+<style type="text/css">
+.window{
+    width:620px;
      background-color:#d0def0;
      position:absolute;
      padding:2px;
@@ -11,19 +12,35 @@
      display:none;
      }
  .content{
-     height:420px;
+     height:320px;
      background-color:#FFF;
-     font-size:14px;
+     font-size:16px;
      overflow:auto;
+     padding:20px 40px;
+
      }
      .title{
          padding:2px;
-         color:#0CF;
+         color:#0078d1;
          font-size:14px;
+         height:30px;
+         font-size:16px;
+         padding:5px 5px 0px 5px;
          }
  .title img{
          float:right;
          }
+ li{
+ padding:5px;
+ }
+ input{
+ width:450px;
+ }
+ .rightpadding{
+ width:400px;
+text-align:right;
+ padding-right:10px
+ }
  </style>
 <link href="{% static 'css/add_address.css' %}" rel="stylesheet" type="text/css">
 <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -107,18 +124,18 @@ function popCenterWindow(){
           <div class="window" id="center">
             <div id="title" class="title"><img src=" {% static 'image/close.jpg' %} " alt="关闭" />新增收货地址</div>
             <div class="content">
-                <form method="post" action="/cart/address/" id="save_address" name="save_address">
+                <form method="post" action="/cart/address/" id="save_address" name="save_address" class="el-form" style="margin-bottom:20px;">
                   <ul>
-                     <li><span>收货人</span><input type="text" name="receiver" id="receiver"></li>
-                     <li><span>所在地区</span><input type="text" name="region" id="region"></li>
-                     <li><span>详细地址</span><input type="text" name="addr" id="addr"></li>
-                     <li><span>手机号码</span><input type="text" name="phone" id="phone"></li>
-                     <li><span>是否设为默认地址</span><input id="default" name="default" type="radio" value="1"  checked/><span>是</span><input id="default" name="default" type="radio" value="0"/><span>否</span></li>
+                     <li class="el-form-item"><span  class="rightpadding">收 货 人 </span><input type="text" name="receiver" id="receiver"></li>
+                     <li class="el-form-item"><span class="rightpadding">所在地区</span><input type="text" name="region" id="region" class="el-form-item"></li>
+                     <li class="el-form-item"><span class="rightpadding">详细地址</span><input type="text" name="addr" id="addr"class="el-form-item"></li>
+                     <li class="el-form-item"><span class="rightpadding">手机号码</span><input type="text" name="phone" id="phone"class="el-form-item"></li>
+                     <li><span class="rightpadding">是否设为默认地址</span><input id="default" name="default" type="radio" value="1" style="width:32px;" checked/><span>是</span><input id="default" name="default" type="radio" style="width:32px;" value="0"/><span>否</span></li>
                   </ul>
                </form>
-               <button class="agree_btn">保存</button>
+               <button class="el-button el-button--primary" style="float:right;" id="agree_btn">保存</button>
                 <script language="javascript" type="text/javascript">
-                    $(".agree_btn").click(function(){
+                    $("#agree_btn").click(function(){
                         csrf = $('input[name="csrfmiddlewaretoken"]').val();
                         params = {
                             'receiver':$('#receiver').val(),

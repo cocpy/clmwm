@@ -305,6 +305,7 @@ class CheckPayView(View):
                 order_track = OrderTrack.objects.create(order=order, status=2)
 
                 # 返回结果
+                # return redirect(reverse('order:success', kwargs={'order_id': order_id}))
                 return JsonResponse({'res': 3, 'message': '支付成功'})
             elif code == '40004' or (code == '10000' and response.get('trade_status') == 'WAIT_BUYER_PAY'):
                 # 等待买家付款
@@ -364,7 +365,7 @@ class QueryOrderView(View):
         # 已完成的订单
         order_finish = OrderInfo.objects.filter(user=user, order_status__gte=7)
         # 已完成的订单商品明细
-        order_finish_goods = OrderGoods.objects.filter(order__in=order_going)
+        order_finish_goods = OrderGoods.objects.filter(order__in=order_finish)
         # 分页处理
         order_going = page_item(order_going, page, 10)
         order_finish = page_item(order_finish, page, 10)
