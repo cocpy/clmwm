@@ -11,45 +11,6 @@
 <script src="{% static 'js/citySet.js' %}"></script>
 {% endblock topfiles %}
 
-{% block header_con %}
-<div id="top">
-   <div class="top1">
-          <div class="top1_con">
-             <div class="top1_con_f">
-                <span>Hi，{% if user.is_authenticated %}{{ user.real_name }} {% endif %}</span><span></span>
-             </div>
-             <div class="top_lore">
-                {% if user.is_authenticated %}
-                {% else %}
-				    <a href="{% url 'user:login' %}">请登录</a> <a href="{% url 'user:register' %}">注册</a>
-                {% endif %}
-
-             </div>
-             <div class="dw_address" style="display: none">
-                请选择地址：<input type="text" id="city"  value=""/>
-             </div>
-             <script type="text/javascript">
-                $("#city").click(function (e) {
-                    SelCity(this,e);
-                    console.log("inout",$(this).val(),new Date())
-                });
-                </script>
-          </div>
-       </div>
-   <div  class="top2">
-      <div class="top2_con">
-         <div class="top2_con_f">
-            <a href="{% url 'goods:index' %}"><img src="{% static 'image/logo.gif' %}"></a>
-         </div>
-         <div class="buy_step3">
-            <ul>
-               <li>1.提交订单</li><li>2.选择支付方式</li><li>3.支付成功</li>
-            </ul>
-         </div>
-      </div>
-   </div>
-</div>
-{% endblock header_con %}
 
 {% block body %}
 <div id="main">

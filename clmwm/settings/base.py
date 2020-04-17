@@ -127,7 +127,9 @@ SESSION_CACHE_ALIAS = "default"
 AUTH_USER_MODEL = 'user.User'
 
 # 百度地图经纬度生成URL
-BAIDU_LNG_LAT_URL = 'http://api.map.baidu.com/geocoder/v2/'
+# BAIDU_LNG_LAT_URL = 'http://api.map.baidu.com/geocoder/v2/'
+BAIDU_LNG_LAT_URL = 'http://api.map.baidu.com/geocoding/v3/'
 
 # 百度地图骑行线路请求URL
-BAIDU_RIDING_URL = 'http://api.map.baidu.com/directionlite/v1/riding'
+# BAIDU_RIDING_URL = 'http://api.map.baidu.com/directionlite/v1/riding'
+BAIDU_RIDING_URL = 'http://api.map.baidu.com/direction/v2/riding'

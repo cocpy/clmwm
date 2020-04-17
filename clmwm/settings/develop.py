@@ -15,10 +15,10 @@ DATABASES = {
 
     'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'clmww',
+         'NAME': 'clmwm',
          'USER': 'root',
-         'PASSWORD': 'yourpassword',
-         'HOST': '134.175.106.182',
+         'PASSWORD': 'root',
+         'HOST': '127.0.0.1',
          'PORT': 3306,
      }
 }
@@ -37,8 +37,10 @@ CACHES = {
     }
 }
 
-# 百度地图AK
-BAIDU_AK = 'p0C5pNxcBpu7hYebHbkRqALvTltOX3OD'
+# 百度地图AK，申请服务端
+# 申请网址：http://lbsyun.baidu.com/apiconsole/key/create
+# BAIDU_AK = 'p0C5pNxcBpu7hYebHbkRqALvTltOX3OD'
+BAIDU_AK = 'qrKpmq8jKCdI9oc23Wc2jvdctK06C2vF'
 
 # 发送邮件配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -63,7 +65,7 @@ DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 # 设置fdfs使用的client.conf文件路径
 FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
 # 设置fdfs存储服务器上nginx的IP和端口号
-FDFS_URL = 'http://134.175.106.182:80/'
+FDFS_URL = 'http://192.168.85.129:80/'
 
 # 配置HayStack
 HAYSTACK_CONNECTIONS = {
@@ -93,7 +95,7 @@ ALIPAY_NOTIFY_URL = "http://127.0.0.1:8000/order/result/"  # 如果只可以内�
 APP_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, 'apps/order/app_private_key.pem'),
 ALIPAY_PUBLIC_KEY_PATH = os.path.join(BASE_DIR, 'apps/order/alipay_public_key.pem')
 
-INSTALLED_APPS +=[
+INSTALLED_APPS += [
     'debug_toolbar',  # 性能排查插件
 ]
 MIDDLEWARE += [

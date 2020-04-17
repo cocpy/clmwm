@@ -14,7 +14,7 @@ django.setup()
 # 创建实例对象
 # 第一个parameter：可随意命名，但一般为本文件所在路径
 # broker：指定中间人，斜杠后指定第几个数据库
-app = Celery('celery_execute_task.sendmail', broker='redis://localhost:6379/3')
+app = Celery('celery_execute_task.sendmail', broker='redis://127.0.0.1:6379/3')
 
 
 # 定义任务函数
