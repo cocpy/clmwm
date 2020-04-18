@@ -45,14 +45,16 @@ BAIDU_AK = 'qrKpmq8jKCdI9oc23Wc2jvdctK06C2vF'
 # 发送邮件配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # SMTP服务地址，使用其他服务器需更换
-EMAIL_HOST = 'smtp.163.com'
+# EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST = 'smtp.cocpy.com'
 EMAIL_PORT = 25
 # 发送邮件的邮箱，换成自己的
-EMAIL_HOST_USER = '15754324003@163.com'
+# EMAIL_HOST_USER = 'clmwm@163.com'
+EMAIL_HOST_USER = 'clmwm@cocpy.com'
 # 在邮箱中设置的客户端授权密码，换成自己的
-EMAIL_HOST_PASSWORD = 'mingrikejio8o2'
+EMAIL_HOST_PASSWORD = 'Cocpy.com'
 # 收件人看到的发件人，<>中地址必须与上方保持一致
-EMAIL_FROM = 'c0c<15754324003@163.com>'
+EMAIL_FROM = 'c0c<clmwm@cocpy.com>'
 
 # django文件存储
 # DEFAULT_FILE_STORAGE = 'clmwm.utils.fastdfs.fdfs_storage.FastDFSStorage'
@@ -83,10 +85,10 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 2
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # APPID
-ALIPAY_APPID = '2016100100636422'  # 沙箱APPID，生产环境须更改为应用APPID。
+ALIPAY_APPID = '2016100100636422'  # 沙箱APPID，生产环境须更改为应用APPID
 # 网关
-ALIPAY_URL = 'https://openapi.alipaydev.com/gateway.do'  # 沙箱网关，生产环境须更改为正式网关。
-# ALIPAY_URL = "https://openapi.alipay.com/gateway.do" # 正式网关，开发环境勿使用。
+ALIPAY_URL = 'https://openapi.alipaydev.com/gateway.do'  # 沙箱网关，生产环境须更改为正式网关
+# ALIPAY_URL = "https://openapi.alipay.com/gateway.do" # 正式网关，开发环境勿使用
 # 回调通知地址 36.104.214.196 127.0.0.1:8000
 ALIPAY_NOTIFY_URL = "http://127.0.0.1:8000/order/result/"  # 如果只可以内网访问开发服务器
 # ALIPAY_NOTIFY_URL = "http://36.104.214.196:8000/order/result/"  # 如果生产环境或外网可以访问开发服务器
@@ -94,6 +96,17 @@ ALIPAY_NOTIFY_URL = "http://127.0.0.1:8000/order/result/"  # 如果只可以内�
 # 使用密钥文件
 APP_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, 'apps/order/app_private_key.pem'),
 ALIPAY_PUBLIC_KEY_PATH = os.path.join(BASE_DIR, 'apps/order/alipay_public_key.pem')
+
+# 买家账号：tcitxu5063@sandbox.com
+# 登录密码：111111
+# 支付密码：111111
+# 用户名称：沙箱环境
+# 证件类型：身份证(IDENTITY_CARD)
+# 证件号码：214808196109135801
+
+# 商家账号：bwudwq5506@sandbox.com
+# 商户UID：2088102178045970
+# 登录密码：111111
 
 INSTALLED_APPS += [
     'debug_toolbar',  # 性能排查插件

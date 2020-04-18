@@ -92,7 +92,7 @@ class RegisterView(View):
         # 读取上传的文件中的file项为二进制文件
         # file_content = ContentFile(img.read())
         # user.image.save(img.name, file_content)
-        user.is_active = 1  # 设置为未激活状态
+        user.is_active = 0  # 设置为未激活状态
         user.save()
 
         # 处理发送邮件
