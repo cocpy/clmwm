@@ -125,6 +125,8 @@ SESSION_CACHE_ALIAS = "default"
 
 # django认证系统使用的模型类
 AUTH_USER_MODEL = 'user.User'
+# 不检测用户的活跃状态
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 # 百度地图经纬度生成URL
 # BAIDU_LNG_LAT_URL = 'http://api.map.baidu.com/geocoder/v2/'

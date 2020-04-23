@@ -38,8 +38,11 @@ def get_distance_duration(origin, destination):
     req = urlopen(uri)
     res = req.read().decode()
     temp = json.loads(res)
-    distance = temp['result']['routes'][0]['distance']
-    duration = temp['result']['routes'][0]['duration']
+    if temp['status'] == 0:
+        distance = temp['result']['routes'][0]['distance']
+        duration = temp['result']['routes'][0]['duration']
+    else:
+        distance, duration = 0, 0
     return {'distance': distance, 'duration': duration}
 
 

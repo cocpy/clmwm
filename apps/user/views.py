@@ -263,7 +263,9 @@ class LoginView(View):
                 return response
             else:
                 # 用户未激活
-                return render(request, 'login.html', {'errmsg': '账户未激活'})
+                # return render(request, 'login.html', {'errmsg': '账户未激活'})
+                messages.error(request, "账户未激活")
+                return render(request, 'login.html', locals(), RequestContext(request))
         else:
             # 用户名或密码错误
             messages.error(request, "用户名或密码错误")
