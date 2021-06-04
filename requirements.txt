@@ -3,7 +3,7 @@ billiard==3.6.0.0
 celery==4.3.0
 certifi==2019.3.9
 chardet==3.0.4
-Django==2.2.2
+Django==2.2.21
 django-debug-toolbar==2.0
 django-haystack==2.8.1
 django-redis==4.10.0
